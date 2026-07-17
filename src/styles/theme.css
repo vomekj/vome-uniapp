@@ -1,0 +1,95 @@
+/**
+ * uniapp 宿主主题（在 tt-shaduni 之上扩展）
+ * - H5：靠 html[data-theme] / .theme-dark
+ * - 小程序：page 为样式根，靠 page[data-theme] / page.theme-dark（由 applyThemeDom 同步）
+ */
+@import 'tt-shaduni/styles/theme.css';
+
+/* ——— 浅色默认（page 作为小程序根也需要默认值） ——— */
+:root,
+page,
+[data-theme='light'] {
+  --vm-page-bg: #f4f6fc;
+  --vm-header-bg: #ffffff;
+  --vm-header-border: #eef0f5;
+  --vm-brand-text: #3b4456;
+  --vm-muted-text: #9aa0b0;
+  --vm-soft-bg: #f4f6fc;
+  --vm-soft-active: rgba(78, 93, 255, 0.12);
+  --vm-brand: #4e5dff;
+  /* 容器面：比页底亮一档，与 admin --card 对齐 */
+  --vm-card: #ffffff;
+  --vm-card-border: #e8ebf5;
+  --vm-card-shadow: 0 10px 30px rgba(40, 50, 120, 0.06);
+  --vm-inset: #f4f6fc;
+}
+
+/**
+ * 深色：必须盖过「page { 浅色 token }」
+ * - H5：html.theme-dark page 提高优先级，避免主区底仍是浅灰
+ * - 小程序：page.theme-dark / page[data-theme=dark]
+ * - 页底 / 卡片分层对齐 admin（#141625 / #1c1f33）
+ */
+html[data-theme='dark'],
+html.theme-dark,
+html[data-theme='dark'] page,
+html.theme-dark page,
+page[data-theme='dark'],
+page.theme-dark,
+[data-theme='dark'],
+.theme-dark {
+  --vm-page-bg: #141625;
+  --vm-header-bg: #141625;
+  --vm-header-border: #252836;
+  --vm-brand-text: #f0f2fa;
+  --vm-muted-text: #9aa0b0;
+  --vm-soft-bg: #1c1f33;
+  --vm-soft-active: rgba(78, 93, 255, 0.22);
+  --vm-brand: #4e5dff;
+  --vm-card: #1c1f33;
+  --vm-card-border: rgba(255, 255, 255, 0.08);
+  --vm-card-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  --vm-inset: #12141f;
+
+  /* 同步盖过 tt 绑在 page 上的浅色 token */
+  --tt-background: #141625;
+  --tt-foreground: #f0f2fa;
+  --tt-card: #1c1f33;
+  --tt-card-foreground: #f0f2fa;
+  --tt-muted: #1c1f33;
+  --tt-muted-foreground: #9aa0b0;
+  --tt-border: rgba(255, 255, 255, 0.08);
+  --tt-secondary: #1c1f33;
+  --tt-accent: #1c1f33;
+}
+
+/* 页面基础（H5 + 小程序共用） */
+page {
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, 'Noto Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--tt-foreground, #2c3142);
+  background-color: var(--vm-page-bg);
+}
+
+/* 业务页根（tt-config-provider）铺满并吃宿主页底色 */
+.tt-config-provider {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--vm-page-bg);
+  color: var(--tt-foreground, #0a0a0a);
+  box-sizing: border-box;
+}
+
+/**
+ * H5 壳层节点（编译后无 page 标签，需额外铺底）
+ * 小程序无这些选择器，忽略即可
+ */
+uni-page-body,
+.uni-page-body,
+uni-page-wrapper {
+  background-color: var(--vm-page-bg) !important;
+}

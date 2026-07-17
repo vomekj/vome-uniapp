@@ -1,0 +1,70 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^tt-(.*)": "@/uni_modules/tt-shaduni/components/tt-$1/tt-$1.vue",
+      "^vm-(.*)": "@/components/vm-$1.vue"
+    }
+  },
+  "topWindow": {
+    "path": "windows/header.vue",
+    "style": {
+      "height": "60px"
+    },
+    "matchMedia": {
+      "minWidth": 768
+    }
+  },
+  // "leftWindow": {
+  //   "path": "windows/sides.vue",
+  //   "style": {
+  //     "width": "240px"
+  //   }
+  // },
+  "pages": [
+    {
+      "path": "pages/tabBar/tabbar"
+    },
+    {
+      "path": "pages/tabBar/home/home"
+    },
+    {
+      "path": "pages/tabBar/discover/discover"
+    },
+    {
+      "path": "pages/tabBar/message/message"
+    },
+    {
+      "path": "pages/tabBar/mine/mine"
+    },
+    {
+      "path": "pages/login/login",
+      "style": {
+        "topWindow": false
+      }
+    }
+  ],
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/tabBar/tabbar"
+      },
+      {
+        "pagePath": "pages/tabBar/home/home"
+      },
+      {
+        "pagePath": "pages/tabBar/discover/discover"
+      },
+      {
+        "pagePath": "pages/tabBar/message/message"
+      },
+      {
+        "pagePath": "pages/tabBar/mine/mine"
+      }
+    ]
+  },
+  "globalStyle": {
+		"navigationStyle": "custom",
+		"navigationBarTitleText": "微茫科技"
+	}
+}

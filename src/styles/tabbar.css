@@ -1,0 +1,15 @@
+/**
+ * 全局隐藏原生 tabBar（保留 pages.json 配置供 uni.switchTab）
+ */
+.uni-app--showtabbar uni-page-wrapper {
+  height: 100% !important;
+}
+
+.uni-tabbar-bottom,
+.uni-tabbar,
+.uni-placeholder-tabbar {
+  display: none !important;
+  height: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}

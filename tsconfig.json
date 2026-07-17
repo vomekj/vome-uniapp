@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "useDefineForClassFields": true,
+    "jsx": "preserve",
+    "noImplicitThis": true,
+    "strict": true,
+    "isolatedModules": true,
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "/@": ["./node_modules/vome-core/dist/client/index.d.ts"],
+      "/@/*": ["./node_modules/vome-core/dist/client/*"],
+      "/#": ["./node_modules/vome-core/dist/index.d.ts"],
+      "/#/typings/*": ["./node_modules/vome-core/typings/admin/*"],
+      "/#/*": ["./node_modules/vome-core/dist/*"]
+    },
+    "lib": ["esnext", "dom"],
+    "types": ["@dcloudio/types"]
+  },
+  "vueCompilerOptions": {
+    "globalTypesPath": "./src/auto-imports.d.ts"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "typings/**/*.d.ts"
+  ],
+  "exclude": ["src/uni_modules/**"]
+}
