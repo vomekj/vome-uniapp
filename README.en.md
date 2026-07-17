@@ -4,7 +4,7 @@
 
 A multi-platform consumer client built with **Vue 3 + uni-app** (H5, WeChat mini program, and more). It shares the same backend as [vome-service](https://gitee.com/vomekj/vome-service), calling **App-side** APIs (`/app/...`) via EPS (`service.user.*`, etc.). Capabilities align with [vome-web](https://gitee.com/vomekj/vome-web); UI uses **tt-shaduni**.
 
-> Open-sourced by Vome / 微茫科技. Start Vome Service first.
+> Open-sourced by Vome / 威迈科技. Start Vome Service first.
 
 ## Features
 
@@ -193,7 +193,7 @@ Issues and PRs in Chinese or English are welcome.
 
 ## License
 
-[MIT](./LICENSE) © VomeShop / 微茫科技
+[MIT](./LICENSE) © VomeShop / 威迈科技
 
 ---
 

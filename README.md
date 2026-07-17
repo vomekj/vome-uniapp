@@ -4,7 +4,7 @@
 
 基于 **Vue 3 + uni-app** 的多端 C 端脚手架（H5、微信小程序等）。与 [vome-service](https://gitee.com/vomekj/vome-service) 共用同一后端，走 **App 侧** API（`/app/...`）与 EPS（`service.user.*` 等）；与 [vome-web](https://gitee.com/vomekj/vome-web) 能力对齐，UI 使用 **tt-shaduni**。
 
-> 微茫科技开源项目。需先启动 Vome Service。
+> 威迈科技开源项目。需先启动 Vome Service。
 
 ## 特性
 
@@ -193,7 +193,7 @@ Issue / PR 欢迎中英文。
 
 ## 许可证
 
-[MIT](./LICENSE) © VomeShop / 微茫科技
+[MIT](./LICENSE) © VomeShop / 威迈科技
 
 ---
 
