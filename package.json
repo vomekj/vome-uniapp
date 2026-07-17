@@ -59,7 +59,7 @@
     "remixicon": "^4.9.1",
     "@wu-xj/uni-socket.io": "^3.7.9",
     "tt-shaduni": "^1.0.1",
-    "vome-core": "0.0.27",
+    "vome-core": "latest",
     "vue": "^3.4.21",
     "vue-i18n": "^9.1.9"
   },
