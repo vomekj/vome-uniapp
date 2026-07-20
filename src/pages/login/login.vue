@@ -304,7 +304,8 @@ import {
   SOCIAL_COLORS,
 } from '@/lib/auth-client'
 
-const PRIMARY_SSO = ['github', 'wechat'] as const
+/** 登录下方常显 SSO 数量；超出部分进「更多」 */
+const SSO_PRIMARY_COUNT = 2
 
 type AuthMode = 'login' | 'register'
 type AuthMethod = 'password' | 'code'
@@ -337,13 +338,12 @@ let countdownTimer = 0
 
 const busy = computed(() => loading.value || !!ssoLoading.value)
 
+/** 按接口返回顺序：前 2 个平铺，其余折叠 */
 const primaryProviders = computed(() =>
-  PRIMARY_SSO.filter((p) => providers.value.includes(p)),
+  providers.value.slice(0, SSO_PRIMARY_COUNT),
 )
 const moreProviders = computed(() =>
-  providers.value.filter(
-    (p) => !(PRIMARY_SSO as readonly string[]).includes(p),
-  ),
+  providers.value.slice(SSO_PRIMARY_COUNT),
 )
 
 function isEmail(v: string) {
