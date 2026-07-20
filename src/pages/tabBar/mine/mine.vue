@@ -6,7 +6,7 @@
       <view class="card">
         <view class="profile">
           <text class="name">{{ helloName }}</text>
-          <text class="meta">{{ userStore.profile?.phone || '未绑定手机号' }}</text>
+          <text class="meta">{{ userStore.info?.phone || '未绑定手机号' }}</text>
         </view>
         <button
           v-if="!authed"

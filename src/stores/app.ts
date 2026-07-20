@@ -110,8 +110,7 @@ export const useAppStore = defineStore('app', {
 })
 
 /**
- * 兼容旧 `appStore.xxx` 写法（Pinia 安装后可用）
- * 组件 setup 内优先 `const app = useAppStore()`
+ * 全局代理（auto-import）；等价 useAppStore()
  */
 export const appStore = new Proxy({} as ReturnType<typeof useAppStore>, {
   get(_t, prop, receiver) {

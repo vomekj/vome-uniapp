@@ -28,9 +28,6 @@ export const useUserStore = defineStore('user', () => {
       '用户',
   )
 
-  /** 兼容旧字段名 profile */
-  const profile = computed(() => info.value ?? null)
-
   function setToken(data: UserTokenPayload) {
     token.value = data.token
     storage.set('token', data.token, Math.max(1, data.expire - 5))
@@ -118,11 +115,6 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  /** @deprecated 用 get() */
-  async function fetchPerson() {
-    return get()
-  }
-
   // 请求层 refresh 后同步 pinia token
   try {
     uni.$on('session:token', (data: UserTokenPayload) => {
@@ -139,7 +131,6 @@ export const useUserStore = defineStore('user', () => {
   return {
     token,
     info,
-    profile,
     loaded,
     displayName,
     setToken,
@@ -149,11 +140,10 @@ export const useUserStore = defineStore('user', () => {
     update,
     clear,
     logout,
-    fetchPerson,
   }
 })
 
-/** 兼容旧 `userStore.xxx`（Pinia 安装后可用） */
+/** 全局代理（auto-import）；等价 useUserStore() */
 export const userStore = new Proxy({} as ReturnType<typeof useUserStore>, {
   get(_t, prop) {
     const store = useUserStore()

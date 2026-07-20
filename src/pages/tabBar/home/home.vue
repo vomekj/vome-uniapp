@@ -26,15 +26,15 @@
           <view class="vm-home__stats">
             <view class="vm-home__stat">
               <text>手机号</text>
-              <text class="strong">{{ userStore.profile?.phone || '—' }}</text>
+              <text class="strong">{{ userStore.info?.phone || '—' }}</text>
             </view>
             <view class="vm-home__stat">
               <text>邮箱</text>
-              <text class="strong">{{ userStore.profile?.email || '—' }}</text>
+              <text class="strong">{{ userStore.info?.email || '—' }}</text>
             </view>
             <view class="vm-home__stat">
               <text>状态</text>
-              <text class="strong">{{ userStore.profile ? '已登录' : '游客' }}</text>
+              <text class="strong">{{ userStore.info ? '已登录' : '游客' }}</text>
             </view>
           </view>
         </view>

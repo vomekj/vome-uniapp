@@ -28,7 +28,6 @@ export function getRefreshToken() {
   return String(storage.get('refreshToken') || '')
 }
 
-/** @deprecated 请用 useUserStore().setToken */
 export function setTokens(accessToken: string, refreshToken: string) {
   storage.set('token', accessToken)
   storage.set('refreshToken', refreshToken, 7 * 24 * 60 * 60)
