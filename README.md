@@ -139,7 +139,7 @@ vome-uniapp/
 │   ├── lib/auth-client.ts     # Better Auth（H5）
 │   ├── stores/                # user / theme / app
 │   ├── utils/                 # storage、route-auth、socket…
-│   ├── config/                # index / proxy / dev / prod（禁止 .env）
+│   ├── config/                # index / proxy / dev / prod
 │   ├── styles/
 │   ├── uni_modules/tt-shaduni/  # postinstall 生成，勿手改提交
 │   ├── pages.json
@@ -165,7 +165,7 @@ vome-uniapp/
 
 ## 配置说明
 
-配置在 `src/config/`（**不使用 `.env`**）：
+配置在 `src/config/`：
 
 | 文件 | 用途 |
 | --- | --- |

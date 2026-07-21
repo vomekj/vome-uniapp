@@ -139,7 +139,7 @@ vome-uniapp/
 │   ├── lib/auth-client.ts     # Better Auth (H5)
 │   ├── stores/                # user / theme / app
 │   ├── utils/                 # storage, route-auth, socket…
-│   ├── config/                # index / proxy / dev / prod (no .env)
+│   ├── config/                # index / proxy / dev / prod
 │   ├── styles/
 │   ├── uni_modules/tt-shaduni/  # from postinstall — don’t hand-commit
 │   ├── pages.json
@@ -165,7 +165,7 @@ vome-uniapp/
 
 ## Configuration
 
-All config lives under `src/config/` (**no `.env`**):
+All config lives under `src/config/` :
 
 | File | Purpose |
 | --- | --- |
