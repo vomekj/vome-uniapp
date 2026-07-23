@@ -34,19 +34,29 @@
             @update:model-value="onDarkChange"
           />
         </tt-cell>
+        <tt-cell
+          v-for="lang in locale.langs"
+          :key="lang.code"
+          :title="localeLabel(lang)"
+          :value="locale.locale === lang.code ? '✓' : ''"
+          border
+          is-link
+          @click="onPickLocale(lang.code)"
+        />
       </view>
     </view>
   </tt-config-provider>
 </template>
 
 <script setup lang="ts">
-import { getAccessToken } from '@/api/client'
+import { useLocaleStore, type I18nLangItem } from '@/stores/locale'
 
 useH5MobileTabShell('mine')
 
+const locale = useLocaleStore()
 const loading = ref(false)
 
-const authed = computed(() => Boolean(getAccessToken()))
+const authed = computed(() => Boolean(userStore.token))
 const helloName = computed(() =>
   authed.value ? userStore.displayName : '未登录',
 )
@@ -56,8 +66,16 @@ onShow(() => {
   void userStore.get()
 })
 
+function localeLabel(lang: I18nLangItem) {
+  return `${lang.flag || ''} ${lang.name}`.trim()
+}
+
 function onDarkChange(value: boolean) {
   setTheme(value ? 'dark' : 'light')
+}
+
+function onPickLocale(code: string) {
+  void locale.setLocale(code)
 }
 
 function goLogin() {

@@ -16,6 +16,12 @@ export function createApp() {
   void bootEps()
     .then(async () => {
       await ensureFreshToken()
+      try {
+        const { useLocaleStore } = await import('@/stores/locale')
+        await useLocaleStore().initLocale()
+      } catch (e) {
+        console.warn('[boot] initLocale failed', e)
+      }
       const { connectWs } = await import('@/utils/socket')
       connectWs()
     })

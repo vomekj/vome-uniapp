@@ -14,12 +14,14 @@ declare global {
   const bootTheme: typeof import('./stores/theme').bootTheme
   const bubbleRef: typeof import('./utils/login-bubble').bubbleRef
   const computed: typeof import('vue').computed
+  const connectWs: typeof import('./utils/socket').connectWs
   const createApp: typeof import('vue').createApp
   const createPinia: typeof import('pinia').createPinia
   const customRef: typeof import('vue').customRef
   const defineAsyncComponent: typeof import('vue').defineAsyncComponent
   const defineComponent: typeof import('vue').defineComponent
   const defineStore: typeof import('pinia').defineStore
+  const disconnectWs: typeof import('./utils/socket').disconnectWs
   const effectScope: typeof import('vue').effectScope
   const getActivePinia: typeof import('pinia').getActivePinia
   const getCurrentInstance: typeof import('vue').getCurrentInstance
@@ -85,6 +87,7 @@ declare global {
   const provide: typeof import('vue').provide
   const reactive: typeof import('vue').reactive
   const readonly: typeof import('vue').readonly
+  const reconnectWs: typeof import('./utils/socket').reconnectWs
   const ref: typeof import('vue').ref
   const resolveComponent: typeof import('vue').resolveComponent
   const resolvedTheme: typeof import('./stores/theme').resolvedTheme
@@ -115,6 +118,7 @@ declare global {
   const useCssVars: typeof import('vue').useCssVars
   const useH5MobileTabShell: typeof import('./utils/h5-tab-layout').useH5MobileTabShell
   const useId: typeof import('vue').useId
+  const useLocaleStore: typeof import('./stores/locale').useLocaleStore
   const useModel: typeof import('vue').useModel
   const useSlots: typeof import('vue').useSlots
   const useStore: typeof import('./stores/index').useStore
@@ -126,6 +130,7 @@ declare global {
   const watchEffect: typeof import('vue').watchEffect
   const watchPostEffect: typeof import('vue').watchPostEffect
   const watchSyncEffect: typeof import('vue').watchSyncEffect
+  const ws: typeof import('./utils/socket').ws
 }
 // for type re-export
 declare global {
@@ -135,6 +140,9 @@ declare global {
   // @ts-ignore
   export type { TabName } from './stores/app'
   import('./stores/app')
+  // @ts-ignore
+  export type { I18nLangItem } from './stores/locale'
+  import('./stores/locale')
   // @ts-ignore
   export type { ThemeMode } from './stores/theme'
   import('./stores/theme')
@@ -156,12 +164,14 @@ declare module 'vue' {
     readonly bootTheme: UnwrapRef<typeof import('./stores/theme')['bootTheme']>
     readonly bubbleRef: UnwrapRef<typeof import('./utils/login-bubble')['bubbleRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
+    readonly connectWs: UnwrapRef<typeof import('./utils/socket')['connectWs']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly createPinia: UnwrapRef<typeof import('pinia')['createPinia']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
+    readonly disconnectWs: UnwrapRef<typeof import('./utils/socket')['disconnectWs']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
@@ -227,6 +237,7 @@ declare module 'vue' {
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
     readonly readonly: UnwrapRef<typeof import('vue')['readonly']>
+    readonly reconnectWs: UnwrapRef<typeof import('./utils/socket')['reconnectWs']>
     readonly ref: UnwrapRef<typeof import('vue')['ref']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolvedTheme: UnwrapRef<typeof import('./stores/theme')['resolvedTheme']>
@@ -257,6 +268,7 @@ declare module 'vue' {
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useH5MobileTabShell: UnwrapRef<typeof import('./utils/h5-tab-layout')['useH5MobileTabShell']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
+    readonly useLocaleStore: UnwrapRef<typeof import('./stores/locale')['useLocaleStore']>
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useStore: UnwrapRef<typeof import('./stores/index')['useStore']>
@@ -268,5 +280,6 @@ declare module 'vue' {
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
     readonly watchSyncEffect: UnwrapRef<typeof import('vue')['watchSyncEffect']>
+    readonly ws: UnwrapRef<typeof import('./utils/socket')['ws']>
   }
 }

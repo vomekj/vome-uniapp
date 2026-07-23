@@ -1,6 +1,7 @@
 import { useAppStore } from './app'
 import { useUserStore } from './user'
 import { useThemeStore } from './theme'
+import { useLocaleStore } from './locale'
 
 /**
  * Store 聚合入口
@@ -10,6 +11,7 @@ export function useStore() {
     app: useAppStore(),
     user: useUserStore(),
     theme: useThemeStore(),
+    locale: useLocaleStore(),
   }
 }
 
@@ -28,3 +30,5 @@ export {
   toggleTheme,
   themeMode,
 } from './theme'
+export { useLocaleStore } from './locale'
+export type { I18nLangItem } from './locale'

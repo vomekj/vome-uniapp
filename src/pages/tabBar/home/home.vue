@@ -97,13 +97,12 @@
 </template>
 
 <script setup lang="ts">
-import { getAccessToken } from '@/api/client'
 import { config } from '@/config'
 
 useH5MobileTabShell('home')
 
 const helloName = computed(() =>
-  getAccessToken() ? userStore.displayName : '访客',
+  userStore.token ? userStore.displayName : '访客',
 )
 
 const cards = [
