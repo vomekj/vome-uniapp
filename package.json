@@ -59,7 +59,7 @@
   "pinia": "^2.2.0",
   "remixicon": "^4.9.1",
   "tt-shaduni": "^1.0.1",
-  "vome-core": "latest",
+  "vome-core": "^0.0.70",
   "vue": "^3.4.21",
   "vue-i18n": "^9.1.9"
  },
