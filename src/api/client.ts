@@ -2,6 +2,7 @@ import { config } from '@/config'
 import {
   configureClient,
   createEps,
+  fetchPackagedEpsJson,
   getService,
 } from '/@'
 import type { RequestOptions } from '/#/typings/comm/request'
@@ -299,7 +300,7 @@ export async function request<T>(
   throw new Error(message)
 }
 
-configureClient({ request })
+configureClient({ request, loadStaticEps: fetchPackagedEpsJson })
 
 export const service = getService('app')
 
