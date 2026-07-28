@@ -63,7 +63,6 @@ const helloName = computed(() =>
 
 onShow(() => {
   appStore.setActive('mine')
-  void userStore.get()
 })
 
 function localeLabel(lang: I18nLangItem) {

@@ -157,11 +157,6 @@ function goLogin() {
 
 onShow(() => {
   appStore.setActive('home')
-  void userStore.get()
-})
-
-onMounted(() => {
-  void userStore.get()
 })
 </script>
 

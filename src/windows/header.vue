@@ -204,7 +204,6 @@ function onUserClick() {
 }
 
 onMounted(() => {
-  void user.get()
   if (!locale.langs.length) void locale.loadLangs()
 })
 </script>

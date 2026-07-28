@@ -9,12 +9,20 @@ const {
   themeMode,
   resolvedTheme,
   isDark,
-  setTheme,
-  toggleTheme: toggleTtTheme,
+  setTheme: setTtTheme,
   initTheme,
 } = useTheme()
 
 let watching = false
+
+/** 弧形扫瞄过渡中，避免连点叠两次 View Transition（仅 H5） */
+let themeTransitioning = false
+
+type ViewTransitionDoc = Document & {
+  startViewTransition?: (update: () => void) => {
+    finished: Promise<void>
+  }
+}
 
 const PAGE_BG = { light: '#f4f6fc', dark: '#141625' } as const
 
@@ -84,8 +92,63 @@ export function applyThemeDom(dark: boolean) {
   }
 }
 
+function prefersReducedMotion() {
+  // #ifdef H5
+  if (typeof window === 'undefined') return true
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  // #endif
+  // #ifndef H5
+  return true
+  // #endif
+}
+
+function runThemeUpdate(apply: () => void, animate: boolean) {
+  // #ifdef H5
+  const doc =
+    typeof document !== 'undefined'
+      ? (document as ViewTransitionDoc)
+      : null
+  if (
+    animate &&
+    doc?.startViewTransition &&
+    !prefersReducedMotion() &&
+    !themeTransitioning
+  ) {
+    themeTransitioning = true
+    const transition = doc.startViewTransition(apply)
+    void transition.finished.finally(() => {
+      themeTransitioning = false
+    })
+    return
+  }
+  // #endif
+  apply()
+}
+
+/**
+ * 包装 tt-shaduni setTheme：H5 亮暗切换走圆弧 View Transition；小程序即时切换。
+ * 不改主题变量定义。
+ */
+export function setTheme(
+  mode: ThemeMode | boolean,
+  options?: { animate?: boolean },
+) {
+  const next: ThemeMode =
+    typeof mode === 'boolean' ? (mode ? 'dark' : 'light') : mode
+  const nextDark =
+    next === 'dark' ? true : next === 'light' ? false : isDark.value
+  const visualChange =
+    next === 'system' ? false : nextDark !== isDark.value
+  const animate = options?.animate !== false && visualChange
+
+  runThemeUpdate(() => {
+    setTtTheme(next)
+    applyThemeDom(isDark.value)
+  }, animate)
+}
+
 function toggleTheme() {
-  toggleTtTheme()
+  setTheme(isDark.value ? 'light' : 'dark')
 }
 
 /** App 启动：读 storage + 首次应用 + 持续 watch */
@@ -123,7 +186,6 @@ export {
   themeMode,
   resolvedTheme,
   isDark,
-  setTheme,
   toggleTheme,
   initTheme,
 }

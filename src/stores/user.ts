@@ -10,6 +10,9 @@ migrateLegacyTokens()
 
 const cached = storage.info()
 
+/** 并发 get 只打一轮 person（App / header / 页面会同时触发） */
+let getFlight: Promise<AppUser | null> | null = null
+
 /**
  * 用户会话
  */
@@ -36,6 +39,8 @@ export const useUserStore = defineStore('user', () => {
       data.refreshToken,
       Math.max(1, data.refreshExpire - 5),
     )
+    // 登录换票后需重新拉 person
+    loaded.value = false
   }
 
   async function refreshToken(): Promise<string> {
@@ -79,6 +84,7 @@ export const useUserStore = defineStore('user', () => {
     token.value = ''
     info.value = undefined
     loaded.value = false
+    getFlight = null
     void import('@/utils/socket').then(({ disconnectWs }) => disconnectWs())
   }
 
@@ -95,24 +101,33 @@ export const useUserStore = defineStore('user', () => {
     })()
   }
 
-  async function get() {
+  /** 全局只打一轮 person；force 用于充值/登录后等需刷新场景 */
+  async function get(opts?: { force?: boolean }) {
     if (!token.value && !storage.get('token')) {
       info.value = undefined
       loaded.value = true
       return null
     }
-    try {
-      const person =
-        (await service.user?.info?.person?.()) ??
-        (await request<AppUser>('/app/user/info/person', { toast: false }))
-      if (person) set(person)
-      return person
-    } catch {
-      clear()
-      return null
-    } finally {
-      loaded.value = true
-    }
+    if (!opts?.force && loaded.value) return info.value ?? null
+    if (getFlight) return getFlight
+
+    getFlight = (async () => {
+      try {
+        const person =
+          (await service.user?.info?.person?.()) ??
+          (await request<AppUser>('/app/user/info/person', { toast: false }))
+        if (person) set(person)
+        return person
+      } catch {
+        clear()
+        return null
+      } finally {
+        loaded.value = true
+        getFlight = null
+      }
+    })()
+
+    return getFlight
   }
 
   // 请求层 refresh 后同步 pinia token
