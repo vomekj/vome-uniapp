@@ -1,6 +1,5 @@
 <template>
-  <tt-config-provider :theme="resolvedTheme" :theme-vars="{ primary: '#4E5DFF' }">
-    <view class="vm-home">
+  <view class="vm-home">
       <view class="vm-home__top">
         <view class="vm-home__hero">
           <view class="vm-home__hero-text">
@@ -93,7 +92,6 @@
         </view>
       </view>
     </view>
-  </tt-config-provider>
 </template>
 
 <script setup lang="ts">
@@ -147,12 +145,12 @@ const capabilities = [
 function goMine() {
   appStore.setActive('mine')
   if (!appStore.isMobile) {
-    uni.switchTab({ url: '/pages/tabBar/mine/mine' })
+    openPage('/pages/mine/index')
   }
 }
 
 function goLogin() {
-  uni.navigateTo({ url: '/pages/login/login' })
+  openPage('/pages/login/index')
 }
 
 onShow(() => {
@@ -285,7 +283,7 @@ onShow(() => {
   display: block;
   margin-bottom: 2px;
   font-size: 12px;
-  color: var(--tt-muted-foreground, #8a90a0);
+  color: var(--vm-muted-text, #8a90a0);
   font-weight: 500;
 }
 
@@ -293,7 +291,7 @@ onShow(() => {
   display: block;
   font-size: 15px;
   font-weight: 650;
-  color: var(--tt-foreground, #2c3142);
+  color: var(--vm-brand-text, #2c3142);
 }
 
 .vm-home__stats {
@@ -310,13 +308,13 @@ onShow(() => {
   border-radius: 14px;
   background: var(--vm-inset, #f4f6fc);
   font-size: 13px;
-  color: var(--tt-muted-foreground, #8a90a0);
+  color: var(--vm-muted-text, #8a90a0);
   font-weight: 500;
 
   .strong {
     font-size: 14px;
     font-weight: 700;
-    color: var(--tt-foreground, #2c3142);
+    color: var(--vm-brand-text, #2c3142);
     max-width: 60%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -347,14 +345,14 @@ onShow(() => {
   margin: 10px 0 5px;
   font-size: 15px;
   font-weight: 650;
-  color: var(--tt-foreground, #2c3142);
+  color: var(--vm-brand-text, #2c3142);
 }
 
 .vm-home__card-desc {
   display: block;
   font-size: 13px;
   line-height: 1.5;
-  color: var(--tt-muted-foreground, #8a90a0);
+  color: var(--vm-muted-text, #8a90a0);
   font-weight: 500;
 }
 
@@ -419,13 +417,13 @@ onShow(() => {
   margin-bottom: 2px;
   font-size: 15px;
   font-weight: 650;
-  color: var(--tt-foreground, #2c3142);
+  color: var(--vm-brand-text, #2c3142);
 }
 
 .vm-home__panel-sub {
   display: block;
   font-size: 12px;
-  color: var(--tt-muted-foreground, #8a90a0);
+  color: var(--vm-muted-text, #8a90a0);
 }
 
 .vm-home__shortcuts {
@@ -458,7 +456,7 @@ onShow(() => {
 .vm-home__shortcut-text {
   font-size: 13px;
   font-weight: 550;
-  color: var(--tt-foreground, #2c3142);
+  color: var(--vm-brand-text, #2c3142);
 }
 
 .vm-home__cap {
@@ -493,14 +491,14 @@ onShow(() => {
   display: block;
   font-size: 13px;
   font-weight: 650;
-  color: var(--tt-foreground, #2c3142);
+  color: var(--vm-brand-text, #2c3142);
 }
 
 .vm-home__cap-desc {
   display: block;
   margin-top: 2px;
   font-size: 12px;
-  color: var(--tt-muted-foreground, #8a90a0);
+  color: var(--vm-muted-text, #8a90a0);
   line-height: 1.45;
 }
 </style>

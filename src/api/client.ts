@@ -61,14 +61,14 @@ function persistTokenPayload(data: UserTokenPayload) {
 function redirectLogin() {
   const pages = getCurrentPages()
   const route = pages[pages.length - 1]?.route || ''
-  if (route.includes('pages/login/login')) return
+  if (route.includes('pages/login/index')) return
   clearTokens()
   try {
     uni.$emit('session:logout')
   } catch {
     // ignore
   }
-  uni.reLaunch({ url: '/pages/login/login' })
+  uni.reLaunch({ url: '/pages/login/index' })
 }
 
 /** 用 refreshToken 换新 access（不走 request，避免递归） */

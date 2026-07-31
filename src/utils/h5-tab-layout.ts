@@ -7,13 +7,13 @@ export function useH5MobileTabShell(tabName: Exclude<TabName, 'tabbar'>) {
 
   // #ifdef H5
   if (appStore.isMobile) {
-    appStore.debouncedSwitchTab('/pages/tabBar/tabbar')
+    appStore.debouncedSwitchTab('/pages/tabbar/index')
   }
   watch(
     () => appStore.isMobile,
     (isMobile) => {
       if (isMobile) {
-        appStore.debouncedSwitchTab('/pages/tabBar/tabbar')
+        appStore.debouncedSwitchTab('/pages/tabbar/index')
       }
     },
   )

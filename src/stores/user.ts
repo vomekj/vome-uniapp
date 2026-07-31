@@ -96,7 +96,7 @@ export const useUserStore = defineStore('user', () => {
         // ignore
       } finally {
         clear()
-        uni.reLaunch({ url: '/pages/login/login' })
+        uni.reLaunch({ url: '/pages/login/index' })
       }
     })()
   }

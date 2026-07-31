@@ -6,21 +6,23 @@
       <Message v-if="active === 'message'" />
       <Mine v-if="active === 'mine'" />
     </view>
-    <vm-app-tabbar v-model="tabName" @change="onTabChange" />
+    <vm-tabbar v-model="tabName" :fixed="false" @change="onTabChange" />
   </view>
 </template>
 
 <script setup lang="ts">
-import Home from '@/pages/tabBar/home/home.vue'
-import Discover from '@/pages/tabBar/discover/discover.vue'
-import Message from '@/pages/tabBar/message/message.vue'
-import Mine from '@/pages/tabBar/mine/mine.vue'
-import VmAppTabbar from '@/components/vm-app-tabbar.vue'
+import Home from '@/pages/home/index.vue'
+import Discover from '@/pages/discover/index.vue'
+import Message from '@/pages/message/index.vue'
+import Mine from '@/pages/mine/index.vue'
+import VmTabbar from '@/components/vm-tabbar.vue'
 
 /**
- * 移动端 Tab 壳：内嵌四页 + 自定义 tt-tabbar。
+ * 移动端 Tab 壳：内嵌四页 + vm-tabbar。
  * 宽屏自动 switchTab 到真实子路由（顶栏切换）。
  */
+definePage({ type: 'home' })
+
 type ShellTab = Exclude<TabName, 'tabbar'>
 
 function resolveTabName(name: string): ShellTab {
@@ -29,7 +31,7 @@ function resolveTabName(name: string): ShellTab {
 }
 
 function resolveTabUrl(name: ShellTab) {
-  return TAB_LIST.find((item) => item.name === name)?.url ?? TAB_LIST[0].url
+  return TAB_LIST.find((item) => item.name === name)?.path ?? TAB_LIST[0].path
 }
 
 const tabName = ref<ShellTab>(

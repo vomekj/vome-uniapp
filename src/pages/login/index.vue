@@ -304,6 +304,12 @@ import {
   SOCIAL_COLORS,
 } from '@/lib/auth-client'
 
+definePage({
+  style: {
+    topWindow: false,
+  },
+})
+
 /** 登录下方常显 SSO 数量；超出部分进「更多」 */
 const SSO_PRIMARY_COUNT = 2
 
@@ -330,7 +336,7 @@ const ssoLoading = ref('')
 const providers = ref<string[]>([])
 const ssoMoreOpen = ref(false)
 const canvasReady = ref(false)
-let redirectUrl = '/pages/tabBar/home/home'
+let redirectUrl = '/pages/home/index'
 let bubbleCanvasEl: HTMLCanvasElement | null = null
 let mountTimer = 0
 let mountTries = 0
@@ -476,14 +482,11 @@ async function finishLogin(payload: {
     else if (path.includes('/discover')) appStore.setActive('discover')
     else if (path.includes('/message')) appStore.setActive('message')
     else appStore.setActive('home')
-    uni.switchTab({ url: '/pages/tabBar/tabbar' })
+    openPage('/pages/tabbar/index')
     return
   }
-  uni.switchTab({
-    url: redirectUrl.startsWith('/pages/tabBar')
-      ? redirectUrl
-      : '/pages/tabBar/home/home',
-  })
+  const pathOnly = redirectUrl.split('?')[0] || ''
+  openPage(isTabPath(pathOnly) ? pathOnly : '/pages/home/index')
 }
 
 async function trySsoSession() {
@@ -583,7 +586,7 @@ async function socialLogin(provider: string) {
   try {
     // #ifdef H5
     const origin = window.location.origin
-    const callbackURL = `${origin}/#/pages/login/login?sso=1`
+    const callbackURL = `${origin}/#/pages/login/index?sso=1`
     await authClient.signIn.social({
       provider: provider as never,
       callbackURL,

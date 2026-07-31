@@ -15,35 +15,36 @@ function resolveLayoutWidth(fallback: number) {
   return fallback
 }
 
+/** 与 web 对齐：字段名 path，值为 `/pages/.../index` */
 export const TAB_LIST: Array<{
   name: Exclude<TabName, 'tabbar'>
   text: string
   icon: string
-  url: string
+  path: string
 }> = [
   {
     name: 'home',
     text: '首页',
     icon: 'ri-home-5-line',
-    url: '/pages/tabBar/home/home',
+    path: '/pages/home/index',
   },
   {
     name: 'discover',
     text: '发现',
     icon: 'ri-compass-3-line',
-    url: '/pages/tabBar/discover/discover',
+    path: '/pages/discover/index',
   },
   {
     name: 'message',
     text: '消息',
     icon: 'ri-notification-3-line',
-    url: '/pages/tabBar/message/message',
+    path: '/pages/message/index',
   },
   {
     name: 'mine',
     text: '我的',
     icon: 'ri-user-3-line',
-    url: '/pages/tabBar/mine/mine',
+    path: '/pages/mine/index',
   },
 ]
 
@@ -73,9 +74,9 @@ export const useAppStore = defineStore('app', {
     goHome() {
       this.setActive('home')
       if (this.isMobile) {
-        uni.switchTab({ url: '/pages/tabBar/tabbar' })
+        uni.switchTab({ url: '/pages/tabbar/index' })
       } else {
-        uni.switchTab({ url: '/pages/tabBar/home/home' })
+        uni.switchTab({ url: '/pages/home/index' })
       }
     },
     initSystemInfo() {

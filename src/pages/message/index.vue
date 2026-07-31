@@ -1,7 +1,7 @@
 <template>
-  <tt-config-provider :theme="resolvedTheme" :theme-vars="{ primary: '#4E5DFF' }">
-    <view class="page"><text class="title">消息</text></view>
-  </tt-config-provider>
+  <view class="page">
+    <text class="title">消息</text>
+  </view>
 </template>
 
 <script setup lang="ts">
@@ -19,6 +19,6 @@ onShow(() => appStore.setActive('message'))
 .title {
   font-size: 18px;
   font-weight: 700;
-  color: var(--tt-foreground, #2c3142);
+  color: var(--vm-brand-text, #2c3142);
 }
 </style>

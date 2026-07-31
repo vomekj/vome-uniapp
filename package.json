@@ -59,7 +59,7 @@
     "pinia": "^2.2.0",
     "remixicon": "^4.9.1",
     "tt-shaduni": "^1.0.1",
-    "vome-core": "^0.0.89",
+    "vome-core": "^0.1.2",
     "vue": "^3.4.21",
     "vue-i18n": "^9.1.9"
   },
@@ -69,6 +69,7 @@
     "@dcloudio/uni-cli-shared": "3.0.0-4080420251103001",
     "@dcloudio/uni-stacktracey": "3.0.0-4080420251103001",
     "@dcloudio/vite-plugin-uni": "3.0.0-4080420251103001",
+    "@uni-helper/vite-plugin-uni-pages": "^0.4.7",
     "@vue/runtime-core": "^3.4.21",
     "@vue/tsconfig": "^0.1.3",
     "sass": "^1.101.0",

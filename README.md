@@ -72,7 +72,7 @@ bun run dev:h5
 | --- | --- |
 | 地址 | [http://localhost:6600](http://localhost:6600) |
 | API 前缀 | `/dev` → Service |
-| 登录页 | `pages/login/login` |
+| 登录页 | `pages/login/index` |
 
 ### 3. 微信小程序（示例）
 
@@ -119,7 +119,7 @@ bun run dev:mp-weixin
 
 | 项 | UniApp | Web |
 | --- | --- | --- |
-| 路由 | `pages.json` | vue-router glob |
+| 路由 | 约定式 → `pages.json` | vue-router glob |
 | UI | tt-shaduni | shadcn-vue |
 | Socket | `@wu-xj/uni-socket.io` | `socket.io-client` |
 | 存储前缀 | `vome_uni_*` | `vome_web_*` |
@@ -129,12 +129,14 @@ bun run dev:mp-weixin
 
 ```text
 vome-uniapp/
+├── pages.config.ts            # easycom / tabBar / globalStyle
 ├── src/
-│   ├── pages/
-│   │   ├── tabBar/            # Tab 壳 + home / discover / message / mine
-│   │   └── login/login.vue
+│   ├── pages/                 # …/index.vue（与 Web 同构）
+│   │   ├── tabbar/index.vue   # Tab 壳（仅 Uni）
+│   │   ├── home|discover|message|mine/index.vue
+│   │   └── login/index.vue
 │   ├── windows/               # 宽屏顶栏等
-│   ├── components/            # vm-ri-icon、vm-app-tabbar…
+│   ├── components/            # vm-ri-icon、vm-tabbar…
 │   ├── api/client.ts          # request、Token、bootEps、service
 │   ├── lib/auth-client.ts     # Better Auth（H5）
 │   ├── stores/                # user / theme / app
@@ -142,7 +144,7 @@ vome-uniapp/
 │   ├── config/                # index / proxy / dev / prod
 │   ├── styles/
 │   ├── uni_modules/tt-shaduni/  # postinstall 生成，勿手改提交
-│   ├── pages.json
+│   ├── pages.json             # 插件生成，勿手改
 │   ├── manifest.json
 │   └── main.ts
 ├── scripts/link-tt-shaduni.mjs
@@ -159,8 +161,8 @@ vome-uniapp/
 
 ## 新增页面
 
-1. 在 `src/pages/` 下建页面，并在 `pages.json` 注册  
-2. Tab 页放在 `pages/tabBar/` 并维护 tab 配置  
+1. 新建 `src/pages/<path>/index.vue`（`@uni-helper/vite-plugin-uni-pages` 自动写入 `pages.json`）  
+2. Tab：同步 `pages.config.ts` → `tabBar.list` + `TAB_LIST` + 壳页  
 3. 调后端优先用 EPS：`api/client` 导出的 `service`  
 
 ## 配置说明

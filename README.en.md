@@ -72,7 +72,7 @@ bun run dev:h5
 | --- | --- |
 | URL | [http://localhost:6600](http://localhost:6600) |
 | API prefix | `/dev` → Service |
-| Login | `pages/login/login` |
+| Login | `pages/login/index` |
 
 ### 3. WeChat mini program (example)
 
@@ -119,7 +119,7 @@ Configure OAuth / mini-program secrets in Service `src/config`.
 
 | Item | UniApp | Web |
 | --- | --- | --- |
-| Routing | `pages.json` | vue-router glob |
+| Routing | file-based → `pages.json` | vue-router glob |
 | UI | tt-shaduni | shadcn-vue |
 | Socket | `@wu-xj/uni-socket.io` | `socket.io-client` |
 | Storage prefix | `vome_uni_*` | `vome_web_*` |
@@ -129,12 +129,14 @@ Configure OAuth / mini-program secrets in Service `src/config`.
 
 ```text
 vome-uniapp/
+├── pages.config.ts            # easycom / tabBar / globalStyle
 ├── src/
-│   ├── pages/
-│   │   ├── tabBar/            # Tab shell + home / discover / message / mine
-│   │   └── login/login.vue
+│   ├── pages/                 # …/index.vue (same as Web)
+│   │   ├── tabbar/index.vue   # Tab shell (Uni only)
+│   │   ├── home|discover|message|mine/index.vue
+│   │   └── login/index.vue
 │   ├── windows/               # Wide-screen header, etc.
-│   ├── components/            # vm-ri-icon, vm-app-tabbar…
+│   ├── components/            # vm-ri-icon, vm-tabbar…
 │   ├── api/client.ts          # request, tokens, bootEps, service
 │   ├── lib/auth-client.ts     # Better Auth (H5)
 │   ├── stores/                # user / theme / app
@@ -142,7 +144,7 @@ vome-uniapp/
 │   ├── config/                # index / proxy / dev / prod
 │   ├── styles/
 │   ├── uni_modules/tt-shaduni/  # from postinstall — don’t hand-commit
-│   ├── pages.json
+│   ├── pages.json             # generated — don’t hand-edit
 │   ├── manifest.json
 │   └── main.ts
 ├── scripts/link-tt-shaduni.mjs
@@ -159,8 +161,8 @@ vome-uniapp/
 
 ## Adding a page
 
-1. Add a page under `src/pages/` and register it in `pages.json`  
-2. Tab pages go under `pages/tabBar/` with tab config updated  
+1. Add `src/pages/<path>/index.vue` (`@uni-helper/vite-plugin-uni-pages` updates `pages.json`)  
+2. Tab: sync `pages.config.ts` → `tabBar.list` + `TAB_LIST` + shell page  
 3. Prefer EPS via `service` from `api/client`  
 
 ## Configuration

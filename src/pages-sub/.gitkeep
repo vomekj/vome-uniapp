@@ -1,0 +1,6 @@
+# 分包页目录（仅 uni-app 生效；web 同步扫此目录，路径同为 /pages-sub/.../index）
+#
+# 约定：
+# - 主包：src/pages/<path>/index.vue → /pages/<path>/index
+# - 分包：src/pages-sub/<path>/index.vue → /pages-sub/<path>/index
+# 零代码「分包」开关只改路径前缀 pages → pages-sub，其余与 vue3 一致。
