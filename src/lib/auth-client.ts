@@ -40,26 +40,10 @@ export async function syncBetterAuthJwt(): Promise<string | null> {
   }
 }
 
-export const SOCIAL_LABELS: Record<string, string> = {
-  github: 'GitHub',
-  google: 'Google',
-  wechat: '微信',
-  gitee: 'Gitee',
-  steam: 'Steam',
-}
-
-export const SOCIAL_ICONS: Record<string, string> = {
-  github: 'ri-github-fill',
-  google: 'ri-google-fill',
-  wechat: 'ri-wechat-fill',
-  gitee: 'ri-git-repository-fill',
-  steam: 'ri-steam-fill',
-}
-
-export const SOCIAL_COLORS: Record<string, string> = {
-  github: '#24292f',
-  google: '#ea4335',
-  wechat: '#07c160',
-  gitee: '#c71d23',
-  steam: '#171a21',
+/** 与 `GET /app/user/login/socialProviders` 一致；展示字段以后端为准，勿本地对照表 */
+export type SocialProviderPublic = {
+  key: string
+  label: string
+  icon: string
+  color: string
 }

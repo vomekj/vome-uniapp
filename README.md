@@ -103,7 +103,6 @@ bun run dev:mp-weixin
 | `bun run build:h5` | H5 生产构建 |
 | `bun run dev:mp-weixin` | 微信小程序开发 |
 | `bun run build:mp-weixin` | 微信小程序构建 |
-| `bun run type-check` | `vue-tsc` |
 | `dev:mp-*` / `build:mp-*` | 其它小程序平台（见 `package.json`） |
 
 ## 端口对照
@@ -135,8 +134,7 @@ vome-uniapp/
 │   │   ├── tabbar/index.vue   # Tab 壳（仅 Uni）
 │   │   ├── home|discover|message|mine/index.vue
 │   │   └── login/index.vue
-│   ├── windows/               # 宽屏顶栏等
-│   ├── components/            # vm-ri-icon、vm-tabbar…
+│   ├── components/            # vm-header / vm-aside（注释占位）/ vm-tabbar / vm-ri-icon
 │   ├── api/client.ts          # request、Token、bootEps、service
 │   ├── lib/auth-client.ts     # Better Auth（H5）
 │   ├── stores/                # user / theme / app
@@ -157,7 +155,7 @@ vome-uniapp/
 1. `bootEps()` → App 侧 EPS  
 2. 路由鉴权（token / 刷新）  
 3. 有 token 时 `connectWs()`  
-4. 移动 / 宽屏双布局（Tab + `topWindow`）  
+4. 移动 / 宽屏双布局（Tab + `topWindow`→vm-header；`leftWindow`/aside 注释占位）  
 
 ## 新增页面
 

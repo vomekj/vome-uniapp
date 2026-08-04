@@ -206,18 +206,18 @@
           <view class="vm-login__sso-row">
             <view
               v-for="p in primaryProviders"
-              :key="p"
+              :key="p.key"
               class="vm-login__sso-chip"
-              :class="[`is-${p}`, { 'is-disabled': busy }]"
-              @click="socialLogin(p)"
+              :class="[`is-${p.key}`, { 'is-disabled': busy }]"
+              @click="socialLogin(p.key)"
             >
               <text
                 class="vm-login__sso-icon"
-                :class="SOCIAL_ICONS[p] || 'ri-login-circle-line'"
-                :style="{ color: SOCIAL_COLORS[p] || '#4e5dff' }"
+                :class="p.icon || 'ri-login-circle-line'"
+                :style="{ color: p.color || '#4e5dff' }"
               />
               <text class="vm-login__sso-text">{{
-                ssoLoading === p ? '…' : SOCIAL_LABELS[p] || p
+                ssoLoading === p.key ? '…' : p.label || p.key
               }}</text>
             </view>
             <view
@@ -250,18 +250,18 @@
             <view class="vm-login__sso-sheet-list">
               <view
                 v-for="p in moreProviders"
-                :key="p"
+                :key="p.key"
                 class="vm-login__sso-chip"
-                :class="[`is-${p}`, { 'is-disabled': busy }]"
-                @click="socialLogin(p)"
+                :class="[`is-${p.key}`, { 'is-disabled': busy }]"
+                @click="socialLogin(p.key)"
               >
                 <text
                   class="vm-login__sso-icon"
-                  :class="SOCIAL_ICONS[p] || 'ri-login-circle-line'"
-                  :style="{ color: SOCIAL_COLORS[p] || '#4e5dff' }"
+                  :class="p.icon || 'ri-login-circle-line'"
+                  :style="{ color: p.color || '#4e5dff' }"
                 />
                 <text class="vm-login__sso-text">{{
-                  ssoLoading === p ? '跳转中…' : SOCIAL_LABELS[p] || p
+                  ssoLoading === p.key ? '跳转中…' : p.label || p.key
                 }}</text>
               </view>
             </view>
@@ -299,14 +299,13 @@ import { getAccessToken, request } from '@/api/client'
 import {
   authClient,
   syncBetterAuthJwt,
-  SOCIAL_LABELS,
-  SOCIAL_ICONS,
-  SOCIAL_COLORS,
+  type SocialProviderPublic,
 } from '@/lib/auth-client'
 
 definePage({
   style: {
     topWindow: false,
+    leftWindow: false,
   },
 })
 
@@ -333,7 +332,7 @@ const codeCountdown = ref(0)
 const error = ref('')
 const loading = ref(false)
 const ssoLoading = ref('')
-const providers = ref<string[]>([])
+const providers = ref<SocialProviderPublic[]>([])
 const ssoMoreOpen = ref(false)
 const canvasReady = ref(false)
 let redirectUrl = '/pages/home/index'
@@ -382,9 +381,12 @@ onLoad((query) => {
 
 async function loadProviders() {
   try {
-    providers.value = await request<string[]>('/app/user/login/socialProviders', {
-      toast: false,
-    })
+    providers.value = await request<SocialProviderPublic[]>(
+      '/app/user/login/socialProviders',
+      {
+        toast: false,
+      },
+    )
   } catch {
     providers.value = []
   }

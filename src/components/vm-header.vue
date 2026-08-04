@@ -30,18 +30,6 @@
     </view>
 
     <view class="actions">
-      <view
-        class="actions__icon"
-        :title="
-          isDark
-            ? locale.t('header.themeLight', '浅色')
-            : locale.t('header.themeDark', '深色')
-        "
-        @click="onToggleTheme"
-      >
-        <vm-ri-icon :name="isDark ? 'ri-sun-line' : 'ri-moon-line'" />
-      </view>
-
       <view class="actions__locale">
         <view
           id="vm-locale-btn"
@@ -96,7 +84,7 @@ import { useUserStore } from '@/stores/user'
 
 /**
  * 桌面顶栏（零代码原生 view/text；路径对齐 web `components/vm-header.vue`）
- * topWindow 经 `windows/header.vue` 薄包装挂载。
+ * H5 宽屏由 pages.config `topWindow.path` 直挂本文件。
  */
 const locale = useLocaleStore()
 const user = useUserStore()
@@ -144,11 +132,6 @@ function switchTab(index: number) {
   closeLocaleMenu()
   appStore.setActive(item.name as TabName)
   openPage(item.path)
-}
-
-function onToggleTheme() {
-  closeLocaleMenu()
-  toggleTheme()
 }
 
 function placeLocaleMenu() {

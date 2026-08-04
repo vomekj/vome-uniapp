@@ -27,6 +27,7 @@ onHide(() => {
 
 <style>
 @import '@/styles/theme.css';
+@import '@/styles/project-theme.css';
 @import '@/styles/tabbar.css';
 @import 'remixicon/fonts/remixicon.css';
 </style>

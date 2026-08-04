@@ -28,11 +28,7 @@
     <view class="section">
       <view class="cell">
         <text class="cell__label">深色模式</text>
-        <switch
-          :checked="isDark"
-          color="#4E5DFF"
-          @change="onDarkChange"
-        />
+        <vm-theme-toggle />
       </view>
       <view
         v-for="lang in locale.langs"
@@ -50,6 +46,7 @@
 </template>
 
 <script setup lang="ts">
+import VmThemeToggle from '@/components/vm-theme-toggle.vue'
 import { useLocaleStore, type I18nLangItem } from '@/stores/locale'
 
 useH5MobileTabShell('mine')
@@ -68,10 +65,6 @@ onShow(() => {
 
 function localeLabel(lang: I18nLangItem) {
   return `${lang.flag || ''} ${lang.name}`.trim()
-}
-
-function onDarkChange(e: { detail?: { value?: boolean } }) {
-  setTheme(e?.detail?.value ? 'dark' : 'light')
 }
 
 function onPickLocale(code: string) {

@@ -7,12 +7,15 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue').EffectScope
+  const MAIN_PAGES_PREFIX: typeof import('./utils/page-path').MAIN_PAGES_PREFIX
+  const SUB_PAGES_PREFIX: typeof import('./utils/page-path').SUB_PAGES_PREFIX
   const TAB_LIST: typeof import('./stores/index').TAB_LIST
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
   const appStore: typeof import('./stores/index').appStore
   const applyThemeDom: typeof import('./stores/theme').applyThemeDom
   const bootTheme: typeof import('./stores/theme').bootTheme
   const bubbleRef: typeof import('./utils/login-bubble').bubbleRef
+  const buildPagePath: typeof import('./utils/page-path').buildPagePath
   const computed: typeof import('vue').computed
   const connectWs: typeof import('./utils/socket').connectWs
   const createApp: typeof import('vue').createApp
@@ -37,6 +40,8 @@ declare global {
   const isReadonly: typeof import('vue').isReadonly
   const isRef: typeof import('vue').isRef
   const isShallow: typeof import('vue').isShallow
+  const isSubPackagePath: typeof import('./utils/page-path').isSubPackagePath
+  const isTabPath: typeof import('./utils/navigation').isTabPath
   const lockDocumentTitle: typeof import('./utils/favicon').lockDocumentTitle
   const mapActions: typeof import('pinia').mapActions
   const mapGetters: typeof import('pinia').mapGetters
@@ -84,6 +89,9 @@ declare global {
   const onUnmounted: typeof import('vue').onUnmounted
   const onUpdated: typeof import('vue').onUpdated
   const onWatcherCleanup: typeof import('vue').onWatcherCleanup
+  const openBack: typeof import('./utils/navigation').openBack
+  const openPage: typeof import('./utils/navigation').openPage
+  const pagePathToSrcFile: typeof import('./utils/page-path').pagePathToSrcFile
   const provide: typeof import('vue').provide
   const reactive: typeof import('vue').reactive
   const readonly: typeof import('vue').readonly
@@ -157,12 +165,15 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly MAIN_PAGES_PREFIX: UnwrapRef<typeof import('./utils/page-path')['MAIN_PAGES_PREFIX']>
+    readonly SUB_PAGES_PREFIX: UnwrapRef<typeof import('./utils/page-path')['SUB_PAGES_PREFIX']>
     readonly TAB_LIST: UnwrapRef<typeof import('./stores/index')['TAB_LIST']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly appStore: UnwrapRef<typeof import('./stores/index')['appStore']>
     readonly applyThemeDom: UnwrapRef<typeof import('./stores/theme')['applyThemeDom']>
     readonly bootTheme: UnwrapRef<typeof import('./stores/theme')['bootTheme']>
     readonly bubbleRef: UnwrapRef<typeof import('./utils/login-bubble')['bubbleRef']>
+    readonly buildPagePath: UnwrapRef<typeof import('./utils/page-path')['buildPagePath']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly connectWs: UnwrapRef<typeof import('./utils/socket')['connectWs']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
@@ -187,6 +198,8 @@ declare module 'vue' {
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly isShallow: UnwrapRef<typeof import('vue')['isShallow']>
+    readonly isSubPackagePath: UnwrapRef<typeof import('./utils/page-path')['isSubPackagePath']>
+    readonly isTabPath: UnwrapRef<typeof import('./utils/navigation')['isTabPath']>
     readonly lockDocumentTitle: UnwrapRef<typeof import('./utils/favicon')['lockDocumentTitle']>
     readonly mapActions: UnwrapRef<typeof import('pinia')['mapActions']>
     readonly mapGetters: UnwrapRef<typeof import('pinia')['mapGetters']>
@@ -234,6 +247,9 @@ declare module 'vue' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly onWatcherCleanup: UnwrapRef<typeof import('vue')['onWatcherCleanup']>
+    readonly openBack: UnwrapRef<typeof import('./utils/navigation')['openBack']>
+    readonly openPage: UnwrapRef<typeof import('./utils/navigation')['openPage']>
+    readonly pagePathToSrcFile: UnwrapRef<typeof import('./utils/page-path')['pagePathToSrcFile']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
     readonly readonly: UnwrapRef<typeof import('vue')['readonly']>

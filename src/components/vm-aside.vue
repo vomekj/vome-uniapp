@@ -22,7 +22,7 @@
 <script setup lang="ts">
 /**
  * 侧栏（零代码原生；路径对齐 web `components/vm-aside.vue`）
- * leftWindow 经 `windows/sides.vue` 薄包装挂载。
+ * H5 宽屏由 pages.config `leftWindow.path` 直挂本文件。
  */
 const menus: Array<{ name: TabName; title: string; path: string }> = [
   { name: 'home', title: '首页', path: '/pages/home/index' },

@@ -103,7 +103,6 @@ Configure OAuth / mini-program secrets in Service `src/config`.
 | `bun run build:h5` | H5 production build |
 | `bun run dev:mp-weixin` | WeChat MP dev |
 | `bun run build:mp-weixin` | WeChat MP build |
-| `bun run type-check` | `vue-tsc` |
 | `dev:mp-*` / `build:mp-*` | Other platforms (see `package.json`) |
 
 ## Port map
@@ -135,8 +134,7 @@ vome-uniapp/
 │   │   ├── tabbar/index.vue   # Tab shell (Uni only)
 │   │   ├── home|discover|message|mine/index.vue
 │   │   └── login/index.vue
-│   ├── windows/               # Wide-screen header, etc.
-│   ├── components/            # vm-ri-icon, vm-tabbar…
+│   ├── components/            # vm-header / vm-aside (commented placeholder) / vm-tabbar / vm-ri-icon
 │   ├── api/client.ts          # request, tokens, bootEps, service
 │   ├── lib/auth-client.ts     # Better Auth (H5)
 │   ├── stores/                # user / theme / app
@@ -157,7 +155,7 @@ vome-uniapp/
 1. `bootEps()` → App-side EPS  
 2. Route auth (token / refresh)  
 3. `connectWs()` when a token exists  
-4. Mobile / wide dual layout (Tab + `topWindow`)  
+4. Mobile / wide dual layout (Tab + `topWindow`→vm-header; leftWindow/aside commented placeholder)  
 
 ## Adding a page
 

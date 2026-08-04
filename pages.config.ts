@@ -3,6 +3,7 @@ import { defineUniPages } from '@uni-helper/vite-plugin-uni-pages'
 /**
  * 静态 pages 元信息（easycom / tabBar / 窗体）。
  * 页面列表由 @uni-helper/vite-plugin-uni-pages 扫 src/pages/** 自动生成。
+ * 宽屏壳直挂 components/vm-header|vm-aside（与 web 同路径，无 windows 薄包装）。
  */
 export default defineUniPages({
   easycom: {
@@ -13,7 +14,7 @@ export default defineUniPages({
     },
   },
   topWindow: {
-    path: 'windows/header.vue',
+    path: 'components/vm-header.vue',
     style: {
       height: '60px',
     },
@@ -21,7 +22,16 @@ export default defineUniPages({
       minWidth: 768,
     },
   },
-  // leftWindow 预留：windows/sides.vue
+  // 侧栏占位：与 web `vm-aside` 对齐，默认关闭
+  // leftWindow: {
+  //   path: 'components/vm-aside.vue',
+  //   style: {
+  //     width: '240px',
+  //   },
+  //   matchMedia: {
+  //     minWidth: 768,
+  //   },
+  // },
   tabBar: {
     list: [
       { pagePath: 'pages/tabbar/index' },
