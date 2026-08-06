@@ -4,8 +4,8 @@ import {
   createEps,
   fetchPackagedEpsJson,
   getService,
-} from '/@'
-import type { RequestOptions } from '/#/typings/comm/request'
+} from '@core/client'
+import type { RequestOptions } from '@core/typings/comm/request'
 import { storage } from '@/utils/storage'
 import type { UserTokenPayload } from '@/typings/user'
 

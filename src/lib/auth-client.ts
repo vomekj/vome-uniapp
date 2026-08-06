@@ -4,7 +4,7 @@ import { config } from '@/config'
 
 /**
  * Better Auth 要求绝对 baseURL。
- * H5：origin + baseUrl（/dev|/prod）；非 H5 回退 host。
+ * H5：origin + baseUrl（/dev|/api）；非 H5 回退 host。
  */
 function resolveAuthBaseURL() {
   const prefix = config.baseUrl.replace(/\/$/, '') || ''

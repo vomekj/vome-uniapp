@@ -30,40 +30,7 @@
     </view>
 
     <view class="actions">
-      <view class="actions__locale">
-        <view
-          id="vm-locale-btn"
-          class="actions__icon actions__locale-btn"
-          :class="{ 'is-disabled': localeSwitching }"
-          @click.stop="toggleLocaleMenu"
-        >
-          <text class="actions__flag">{{
-            locale.currentLang?.flag || '🏳️'
-          }}</text>
-        </view>
-        <view
-          v-if="localeOpen"
-          class="actions__locale-mask"
-          @click="closeLocaleMenu"
-        />
-        <view
-          v-if="localeOpen"
-          class="actions__locale-menu"
-          :style="localeMenuStyle"
-          @click.stop
-        >
-          <view
-            v-for="lang in locale.langs"
-            :key="lang.code"
-            class="actions__locale-item"
-            :class="{ 'is-active': locale.locale === lang.code }"
-            @click="switchLocale(lang.code)"
-          >
-            <text class="actions__flag">{{ lang.flag || '🏳️' }}</text>
-            <text class="actions__locale-label">{{ lang.name }}</text>
-          </view>
-        </view>
-      </view>
+      <vm-locale-toggle />
 
       <view class="actions__user" @click="onUserClick">
         <view class="actions__avatar">
@@ -77,6 +44,7 @@
 </template>
 
 <script setup lang="ts">
+import VmLocaleToggle from '@/components/vm-locale-toggle.vue'
 import VmRiIcon from '@/components/vm-ri-icon.vue'
 import { config } from '@/config'
 import { useLocaleStore } from '@/stores/locale'
@@ -89,9 +57,6 @@ import { useUserStore } from '@/stores/user'
 const locale = useLocaleStore()
 const user = useUserStore()
 const tabList = TAB_LIST
-const localeOpen = ref(false)
-const localeSwitching = ref(false)
-const localeMenuStyle = ref<Record<string, string>>({})
 
 const current = computed(() =>
   tabList.findIndex((item) => item.name === appStore.active),
@@ -117,63 +82,18 @@ const logoSrc = computed(() =>
     : '/static/image/logo-dark.png',
 )
 
-function closeLocaleMenu() {
-  localeOpen.value = false
-}
-
 function goHome() {
   appStore.goHome()
-  closeLocaleMenu()
 }
 
 function switchTab(index: number) {
   const item = tabList[index]
   if (!item) return
-  closeLocaleMenu()
   appStore.setActive(item.name as TabName)
   openPage(item.path)
 }
 
-function placeLocaleMenu() {
-  // topWindow 仅 60px，须 fixed 锚定按钮，避免被裁切
-  uni
-    .createSelectorQuery()
-    .select('#vm-locale-btn')
-    .boundingClientRect((rect) => {
-      const r = rect as UniApp.NodeInfo | null
-      if (!r || r.right == null || r.bottom == null) return
-      const gap = 6
-      localeMenuStyle.value = {
-        top: `${Number(r.bottom) + gap}px`,
-        right: `${Math.max(8, window.innerWidth - Number(r.right))}px`,
-      }
-    })
-    .exec()
-}
-
-function toggleLocaleMenu() {
-  if (localeSwitching.value) return
-  if (localeOpen.value) {
-    closeLocaleMenu()
-    return
-  }
-  placeLocaleMenu()
-  localeOpen.value = true
-}
-
-async function switchLocale(code: string) {
-  if (localeSwitching.value) return
-  localeSwitching.value = true
-  closeLocaleMenu()
-  try {
-    await locale.setLocale(code)
-  } finally {
-    localeSwitching.value = false
-  }
-}
-
 function onUserClick() {
-  closeLocaleMenu()
   if (!authed.value) {
     openPage('/pages/login/index')
     return
@@ -185,10 +105,6 @@ function onUserClick() {
   }
   openPage('/pages/mine/index')
 }
-
-onMounted(() => {
-  if (!locale.langs.length) void locale.loadLangs()
-})
 </script>
 
 <style lang="scss" scoped>
@@ -302,98 +218,6 @@ onMounted(() => {
   flex-shrink: 0;
   align-items: center;
   gap: 8px;
-}
-
-.actions__locale {
-  position: relative;
-  z-index: 30;
-}
-
-.actions__locale-btn {
-  &.is-disabled {
-    opacity: 0.6;
-  }
-}
-
-.actions__flag {
-  font-size: 16px;
-  line-height: 1;
-}
-
-.actions__locale-mask {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: transparent;
-}
-
-.actions__locale-menu {
-  position: fixed;
-  z-index: 1001;
-  width: max-content;
-  min-width: 108px;
-  max-width: 140px;
-  padding: 4px;
-  border-radius: 10px;
-  border: 1px solid var(--vm-header-border, #eef0f5);
-  background: var(--vm-header-bg, #ffffff);
-  box-shadow: 0 8px 20px rgba(20, 22, 37, 0.12);
-  box-sizing: border-box;
-}
-
-.actions__locale-item {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 8px;
-  border-radius: 8px;
-  box-sizing: border-box;
-
-  &:active {
-    background: var(--vm-soft-bg, #f4f6fc);
-  }
-
-  &.is-active {
-    background: var(--vm-soft-active, rgba(78, 93, 255, 0.12));
-  }
-}
-
-.actions__locale-label {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 12px;
-  line-height: 1.2;
-  color: var(--vm-brand-text, #3b4456);
-  text-align: left;
-}
-
-.actions__locale-item.is-active .actions__locale-label {
-  color: #4e5dff;
-  font-weight: 600;
-}
-
-.actions__icon {
-  display: flex;
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  background: var(--vm-soft-bg, #f4f6fc);
-  color: var(--vm-brand-text, #3b4456);
-  font-size: 18px;
-  cursor: pointer;
-  box-sizing: border-box;
-
-  &:active {
-    opacity: 0.85;
-  }
 }
 
 .actions__user {

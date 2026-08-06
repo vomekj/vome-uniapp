@@ -13,6 +13,7 @@ function authToken() {
  */
 export const ws = io(config.host, {
   autoConnect: false,
+  path: '/socket/',
   transports: ['websocket'],
   auth: {
     token: authToken(),
