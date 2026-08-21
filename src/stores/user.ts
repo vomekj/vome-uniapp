@@ -117,9 +117,19 @@ export const useUserStore = defineStore('user', () => {
           (await service.user?.info?.person?.()) ??
           (await request<AppUser>('/app/user/info/person', { toast: false }))
         if (person) set(person)
+        token.value = String(storage.get('token') || '')
         return person
       } catch {
-        clear()
+        // request/refresh 失败才会清 token；后端重启/网络抖动不要丢掉 refreshToken
+        const access = String(storage.get('token') || '')
+        if (!access || storage.isExpired('token')) {
+          if (storage.isExpired('refreshToken') || !storage.get('refreshToken')) {
+            clear()
+          } else {
+            // 仅 access 暂不可用，保留 refresh 与缓存资料
+            token.value = ''
+          }
+        }
         return null
       } finally {
         loaded.value = true

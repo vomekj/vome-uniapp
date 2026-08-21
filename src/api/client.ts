@@ -138,7 +138,7 @@ export async function ensureFreshToken(): Promise<string> {
     requests.forEach((cb) => cb(token))
     requests = []
     return token
-  } catch {
+  } catch (err) {
     requests.forEach((cb) => {
       try {
         cb('')
@@ -147,7 +147,15 @@ export async function ensureFreshToken(): Promise<string> {
       }
     })
     requests = []
-    redirectLogin()
+    const msg = err instanceof Error ? err.message : String(err)
+    // 服务端拒绝 refresh 才登出；网络错误保留 refreshToken
+    if (
+      /刷新 token 失败|无 refreshToken|过期|登录已失效|Unauthorized|unauthorized/i.test(
+        msg,
+      )
+    ) {
+      redirectLogin()
+    }
     return ''
   } finally {
     isRefreshing = false
@@ -194,7 +202,14 @@ export async function request<T>(
           }
         })
         requests = []
-        redirectLogin()
+        const msg = err instanceof Error ? err.message : String(err)
+        if (
+          /刷新 token 失败|无 refreshToken|过期|登录已失效|Unauthorized|unauthorized/i.test(
+            msg,
+          )
+        ) {
+          redirectLogin()
+        }
         throw err instanceof Error ? err : new Error('登录已失效')
       } finally {
         isRefreshing = false
