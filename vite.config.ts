@@ -30,7 +30,14 @@ export default defineConfig(async () => {
       AutoImport({
         imports: ['vue', 'uni-app', 'pinia'],
         dts: 'src/auto-imports.d.ts',
-        dirs: ['src/stores/**', 'src/utils/**', 'src/types/**'],
+        dirs: [
+          'src/stores/app.ts',
+          'src/stores/user.ts',
+          'src/stores/theme.ts',
+          'src/stores/locale.ts',
+          'src/utils/**',
+          'src/types/**',
+        ],
         vueTemplate: true,
       }),
       uni(),

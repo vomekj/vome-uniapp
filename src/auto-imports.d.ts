@@ -9,10 +9,10 @@ declare global {
   const EffectScope: typeof import('vue').EffectScope
   const MAIN_PAGES_PREFIX: typeof import('./utils/page-path').MAIN_PAGES_PREFIX
   const SUB_PAGES_PREFIX: typeof import('./utils/page-path').SUB_PAGES_PREFIX
-  const TAB_LIST: typeof import('./stores/index').TAB_LIST
+  const TAB_LIST: typeof import('./stores/app').TAB_LIST
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
   const addCanvasPaintRipple: typeof import('./utils/canvas-effects').addCanvasPaintRipple
-  const appStore: typeof import('./stores/index').appStore
+  const appStore: typeof import('./stores/app').appStore
   const applyThemeDom: typeof import('./stores/theme').applyThemeDom
   const bootTheme: typeof import('./stores/theme').bootTheme
   const bubbleRef: typeof import('./utils/login-bubble').bubbleRef
@@ -126,7 +126,7 @@ declare global {
   const triggerRef: typeof import('vue').triggerRef
   const unref: typeof import('vue').unref
   const updateCanvasPaint: typeof import('./utils/canvas-effects').updateCanvasPaint
-  const useAppStore: typeof import('./stores/index').useAppStore
+  const useAppStore: typeof import('./stores/app').useAppStore
   const useAttrs: typeof import('vue').useAttrs
   const useCssModule: typeof import('vue').useCssModule
   const useCssVars: typeof import('vue').useCssVars
@@ -155,14 +155,14 @@ declare global {
   export type { TabName } from './stores/app'
   import('./stores/app')
   // @ts-ignore
-  export type { I18nLangItem } from './stores/locale'
-  import('./stores/locale')
+  export type { AppUser, UserTokenPayload } from './stores/user'
+  import('./stores/user')
   // @ts-ignore
   export type { ThemeMode } from './stores/theme'
   import('./stores/theme')
   // @ts-ignore
-  export type { AppUser, UserTokenPayload } from './stores/user'
-  import('./stores/user')
+  export type { I18nLangItem } from './stores/locale'
+  import('./stores/locale')
   // @ts-ignore
   export type { CanvasPaintLayer, CanvasPaintRipple, CanvasPaintOptions } from './utils/canvas-effects'
   import('./utils/canvas-effects')
@@ -176,10 +176,10 @@ declare module 'vue' {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly MAIN_PAGES_PREFIX: UnwrapRef<typeof import('./utils/page-path')['MAIN_PAGES_PREFIX']>
     readonly SUB_PAGES_PREFIX: UnwrapRef<typeof import('./utils/page-path')['SUB_PAGES_PREFIX']>
-    readonly TAB_LIST: UnwrapRef<typeof import('./stores/index')['TAB_LIST']>
+    readonly TAB_LIST: UnwrapRef<typeof import('./stores/app')['TAB_LIST']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly addCanvasPaintRipple: UnwrapRef<typeof import('./utils/canvas-effects')['addCanvasPaintRipple']>
-    readonly appStore: UnwrapRef<typeof import('./stores/index')['appStore']>
+    readonly appStore: UnwrapRef<typeof import('./stores/app')['appStore']>
     readonly applyThemeDom: UnwrapRef<typeof import('./stores/theme')['applyThemeDom']>
     readonly bootTheme: UnwrapRef<typeof import('./stores/theme')['bootTheme']>
     readonly bubbleRef: UnwrapRef<typeof import('./utils/login-bubble')['bubbleRef']>
@@ -293,7 +293,7 @@ declare module 'vue' {
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly updateCanvasPaint: UnwrapRef<typeof import('./utils/canvas-effects')['updateCanvasPaint']>
-    readonly useAppStore: UnwrapRef<typeof import('./stores/index')['useAppStore']>
+    readonly useAppStore: UnwrapRef<typeof import('./stores/app')['useAppStore']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
@@ -302,7 +302,6 @@ declare module 'vue' {
     readonly useLocaleStore: UnwrapRef<typeof import('./stores/locale')['useLocaleStore']>
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
-    readonly useStore: UnwrapRef<typeof import('./stores/index')['useStore']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly useThemeStore: UnwrapRef<typeof import('./stores/theme')['useThemeStore']>
     readonly useUserStore: UnwrapRef<typeof import('./stores/user')['useUserStore']>

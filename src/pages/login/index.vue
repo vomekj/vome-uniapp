@@ -723,21 +723,21 @@ onUnload(unmountBubble)
 
 .vm-login__bubble-blob {
   position: absolute;
-  left: -18%;
-  top: 6%;
-  width: 105%;
-  height: 105%;
-  border-radius: 50%;
+  left: -42%;
+  top: -8%;
+  width: 92%;
+  height: 118%;
+  border-radius: 46% 54% 52% 48% / 48% 46% 54% 52%;
   background: radial-gradient(
-    ellipse 55% 50% at 32% 38%,
-    rgba(255, 255, 255, 0.85) 0%,
-    rgba(186, 196, 255, 0.55) 22%,
-    rgba(140, 155, 255, 0.35) 45%,
-    rgba(155, 168, 255, 0.16) 68%,
+    ellipse 100% 100% at 26% 36%,
+    rgba(255, 255, 255, 0.78) 0%,
+    rgba(186, 196, 255, 0.48) 28%,
+    rgba(120, 135, 255, 0.28) 58%,
+    rgba(155, 168, 255, 0.12) 82%,
     rgba(155, 168, 255, 0) 100%
   );
-  filter: blur(2px);
-  box-shadow: 0 0 80px rgba(78, 93, 255, 0.22);
+  filter: blur(1px);
+  box-shadow: 0 0 80px rgba(78, 93, 255, 0.28);
   animation: vm-bubble-breathe 5.2s ease-in-out infinite;
 }
 

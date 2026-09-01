@@ -1,5 +1,6 @@
 import { config } from '@/config'
 import {
+  bindEpsHotReload,
   configureClient,
   createEps,
   fetchPackagedEpsJson,
@@ -243,7 +244,7 @@ export async function request<T>(
       url: apiUrl(path),
       method: method as UniApp.RequestOptions['method'],
       header: headers,
-      data: method === 'GET' ? undefined : body,
+      data: method === 'GET' ? undefined : (body as UniApp.RequestOptions['data']),
       success: (res) => resolve(res as never),
       fail: (err) => reject(err),
     })
@@ -293,7 +294,7 @@ export async function request<T>(
             url: apiUrl(path),
             method: method as UniApp.RequestOptions['method'],
             header: headers,
-            data: method === 'GET' ? undefined : body,
+            data: method === 'GET' ? undefined : (body as UniApp.RequestOptions['data']),
             success: (res) => resolve(res as never),
             fail: (err) => reject(err),
           })
@@ -318,7 +319,8 @@ export async function request<T>(
   throw new Error(message)
 }
 
-configureClient({ request, loadStaticEps: fetchPackagedEpsJson })
+configureClient({ baseUrl: config.baseUrl, request, loadStaticEps: fetchPackagedEpsJson })
+bindEpsHotReload('app')
 
 export const service = getService('app')
 
