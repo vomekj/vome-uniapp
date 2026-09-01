@@ -224,6 +224,9 @@ export async function request<T>(
 
   if (token) headers.authorization = `Bearer ${token}`
 
+  const lang = String(storage.get<string>('locale') || '').trim()
+  if (lang) headers['X-Lang'] = lang
+
   let body: unknown = undefined
   if (rest.body != null) {
     body =

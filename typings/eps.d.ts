@@ -370,23 +370,9 @@ declare namespace Eps {
 		/** 当前会话上下文 */
 		me(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: Agent_authEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<Agent_authEntity[]>;
-
-		info(data?: { id: number | string }): Promise<Agent_authEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { heartbeat: string; closeSession: string; me: string; page: string; list: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { heartbeat: boolean; closeSession: boolean; me: boolean; page: boolean; list: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { heartbeat: string; closeSession: string; me: string };
+		_permission: { heartbeat: boolean; closeSession: boolean; me: boolean };
 		request: Eps.Request;
 	}
 
@@ -400,23 +386,9 @@ declare namespace Eps {
 		/** 采纳结果写回知识库 */
 		adoptionWriteback(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: Agent_kbEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<Agent_kbEntity[]>;
-
-		info(data?: { id: number | string }): Promise<Agent_kbEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { search: string; upsert: string; adoptionWriteback: string; page: string; list: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { search: boolean; upsert: boolean; adoptionWriteback: boolean; page: boolean; list: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { search: string; upsert: string; adoptionWriteback: string };
+		_permission: { search: boolean; upsert: boolean; adoptionWriteback: boolean };
 		request: Eps.Request;
 	}
 
@@ -430,23 +402,9 @@ declare namespace Eps {
 		/** 流式对话（扣项目拥有者金币；经 agent 转发） */
 		chat(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: Ai_chatEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<Ai_chatEntity[]>;
-
-		info(data?: { id: number | string }): Promise<Ai_chatEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { models: string; embed: string; chat: string; page: string; list: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { models: boolean; embed: boolean; chat: boolean; page: boolean; list: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { models: string; embed: string; chat: string };
+		_permission: { models: boolean; embed: boolean; chat: boolean };
 		request: Eps.Request;
 	}
 
@@ -454,23 +412,9 @@ declare namespace Eps {
 		/** 获取云端上传签名（仅 app/public/vomecode/） */
 		upload(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: Base_commEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<Base_commEntity[]>;
-
-		info(data?: { id: number | string }): Promise<Base_commEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { upload: string; page: string; list: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { upload: boolean; page: boolean; list: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { upload: string };
+		_permission: { upload: boolean };
 		request: Eps.Request;
 	}
 
@@ -496,23 +440,9 @@ declare namespace Eps {
 		/** 按父 value + 子名称直取子 value */
 		childValue(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: Base_dictEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<Base_dictEntity[]>;
-
-		info(data?: { id: number | string }): Promise<Base_dictEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { types: string; data: string; get: string; find: string; getValues: string; pathValue: string; childValue: string; page: string; list: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { types: boolean; data: boolean; get: boolean; find: boolean; getValues: boolean; pathValue: boolean; childValue: boolean; page: boolean; list: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { types: string; data: string; get: string; find: string; getValues: string; pathValue: string; childValue: string };
+		_permission: { types: boolean; data: boolean; get: boolean; find: boolean; getValues: boolean; pathValue: boolean; childValue: boolean };
 		request: Eps.Request;
 	}
 
@@ -520,23 +450,9 @@ declare namespace Eps {
 		/** 平台 EPS（白名单子集，非业务后端） */
 		eps(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: Base_openEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<Base_openEntity[]>;
-
-		info(data?: { id: number | string }): Promise<Base_openEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { eps: string; page: string; list: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { eps: boolean; page: boolean; list: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { eps: string };
+		_permission: { eps: boolean };
 		request: Eps.Request;
 	}
 
@@ -556,17 +472,9 @@ declare namespace Eps {
 		/** 导入 */
 		import(data?: any): Promise<any>;
 
-		list(data?: any): Promise<FaqPostEntity[]>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { page: string; info: string; add: string; importTemplate: string; import: string; list: string; update: string; delete: string; restore: string };
-		_permission: { page: boolean; info: boolean; add: boolean; importTemplate: boolean; import: boolean; list: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { page: string; info: string; add: string; importTemplate: string; import: string };
+		_permission: { page: boolean; info: boolean; add: boolean; importTemplate: boolean; import: boolean };
 		request: Eps.Request;
 	}
 
@@ -583,19 +491,9 @@ declare namespace Eps {
 		/** 导入 */
 		import(data?: any): Promise<any>;
 
-		list(data?: any): Promise<FaqReplyEntity[]>;
-
-		info(data?: { id: number | string }): Promise<FaqReplyEntity>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { page: string; add: string; importTemplate: string; import: string; list: string; info: string; update: string; delete: string; restore: string };
-		_permission: { page: boolean; add: boolean; importTemplate: boolean; import: boolean; list: boolean; info: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { page: string; add: string; importTemplate: string; import: string };
+		_permission: { page: boolean; add: boolean; importTemplate: boolean; import: boolean };
 		request: Eps.Request;
 	}
 
@@ -603,21 +501,9 @@ declare namespace Eps {
 		/** 类型列表 */
 		list(data?: any): Promise<FaqTypeEntity[]>;
 
-		page(data?: any): Promise<{ list: FaqTypeEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		info(data?: { id: number | string }): Promise<FaqTypeEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { list: string; page: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { list: boolean; page: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { list: string };
+		_permission: { list: boolean };
 		request: Eps.Request;
 	}
 
@@ -628,23 +514,9 @@ declare namespace Eps {
 		/** 运行时拉取语言包 */
 		active(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: I18n_packEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<I18n_packEntity[]>;
-
-		info(data?: { id: number | string }): Promise<I18n_packEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { locales: string; active: string; page: string; list: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { locales: boolean; active: boolean; page: boolean; list: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { locales: string; active: string };
+		_permission: { locales: boolean; active: boolean };
 		request: Eps.Request;
 	}
 
@@ -670,23 +542,9 @@ declare namespace Eps {
 		/** 模拟支付到账（开发） */
 		ordermockPay(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: Order_subscribeEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<Order_subscribeEntity[]>;
-
-		info(data?: { id: number | string }): Promise<Order_subscribeEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { plans: string; mine: string; teamMine: string; team: string; orderquote: string; ordercreate: string; ordermockPay: string; page: string; list: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { plans: boolean; mine: boolean; teamMine: boolean; team: boolean; orderquote: boolean; ordercreate: boolean; ordermockPay: boolean; page: boolean; list: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { plans: string; mine: string; teamMine: string; team: string; orderquote: string; ordercreate: string; ordermockPay: string };
+		_permission: { plans: boolean; mine: boolean; teamMine: boolean; team: boolean; orderquote: boolean; ordercreate: boolean; ordermockPay: boolean };
 		request: Eps.Request;
 	}
 
@@ -709,15 +567,9 @@ declare namespace Eps {
 		/** 导入 */
 		import(data?: any): Promise<any>;
 
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { page: string; list: string; info: string; add: string; importTemplate: string; import: string; update: string; delete: string; restore: string };
-		_permission: { page: boolean; list: boolean; info: boolean; add: boolean; importTemplate: boolean; import: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { page: string; list: string; info: string; add: string; importTemplate: string; import: string };
+		_permission: { page: boolean; list: boolean; info: boolean; add: boolean; importTemplate: boolean; import: boolean };
 		request: Eps.Request;
 	}
 
@@ -734,19 +586,9 @@ declare namespace Eps {
 		/** 导入 */
 		import(data?: any): Promise<any>;
 
-		list(data?: any): Promise<PluginReplyEntity[]>;
-
-		info(data?: { id: number | string }): Promise<PluginReplyEntity>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { page: string; add: string; importTemplate: string; import: string; list: string; info: string; update: string; delete: string; restore: string };
-		_permission: { page: boolean; add: boolean; importTemplate: boolean; import: boolean; list: boolean; info: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { page: string; add: string; importTemplate: string; import: string };
+		_permission: { page: boolean; add: boolean; importTemplate: boolean; import: boolean };
 		request: Eps.Request;
 	}
 
@@ -757,19 +599,9 @@ declare namespace Eps {
 		/** 标签分页 */
 		page(data?: any): Promise<{ list: PluginTagEntity[]; pagination: { page: number; size: number; total: number } }>;
 
-		info(data?: { id: number | string }): Promise<PluginTagEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { list: string; page: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { list: boolean; page: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { list: string; page: string };
+		_permission: { list: boolean; page: boolean };
 		request: Eps.Request;
 	}
 
@@ -798,21 +630,9 @@ declare namespace Eps {
 		/** 释放席位（签发 ticket） */
 		release(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: PluginStore_seatEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<PluginStore_seatEntity[]>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { info: string; upgrade: string; occupies: string; forceRelease: string; allowReoccupy: string; occupy: string; heartbeat: string; release: string; page: string; list: string; add: string; update: string; delete: string; restore: string };
-		_permission: { info: boolean; upgrade: boolean; occupies: boolean; forceRelease: boolean; allowReoccupy: boolean; occupy: boolean; heartbeat: boolean; release: boolean; page: boolean; list: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { info: string; upgrade: string; occupies: string; forceRelease: string; allowReoccupy: string; occupy: string; heartbeat: string; release: string };
+		_permission: { info: boolean; upgrade: boolean; occupies: boolean; forceRelease: boolean; allowReoccupy: boolean; occupy: boolean; heartbeat: boolean; release: boolean };
 		request: Eps.Request;
 	}
 
@@ -856,21 +676,9 @@ declare namespace Eps {
 		/** 我的提现记录 */
 		withdrawpage(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: PluginStore_walletEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<PluginStore_walletEntity[]>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { info: string; rechargecreate: string; rechargemockPay: string; purchase: string; packageaccess: string; packagedownload: string; packagelicense: string; licenseissue: string; packageticket: string; salespage: string; myPluginspage: string; withdrawapply: string; withdrawpage: string; page: string; list: string; add: string; update: string; delete: string; restore: string };
-		_permission: { info: boolean; rechargecreate: boolean; rechargemockPay: boolean; purchase: boolean; packageaccess: boolean; packagedownload: boolean; packagelicense: boolean; licenseissue: boolean; packageticket: boolean; salespage: boolean; myPluginspage: boolean; withdrawapply: boolean; withdrawpage: boolean; page: boolean; list: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { info: string; rechargecreate: string; rechargemockPay: string; purchase: string; packageaccess: string; packagedownload: string; packagelicense: string; licenseissue: string; packageticket: string; salespage: string; myPluginspage: string; withdrawapply: string; withdrawpage: string };
+		_permission: { info: boolean; rechargecreate: boolean; rechargemockPay: boolean; purchase: boolean; packageaccess: boolean; packagedownload: boolean; packagelicense: boolean; licenseissue: boolean; packageticket: boolean; salespage: boolean; myPluginspage: boolean; withdrawapply: boolean; withdrawpage: boolean };
 		request: Eps.Request;
 	}
 
@@ -914,15 +722,9 @@ declare namespace Eps {
 		/** 素材组件导入到当前项目 */
 		importComponent(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: Project_assetEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { list: string; info: string; createFolder: string; createFile: string; createFromComponent: string; createFromSnapshot: string; rename: string; move: string; delete: string; trash: string; restore: string; forceDelete: string; importComponent: string; page: string; add: string; update: string };
-		_permission: { list: boolean; info: boolean; createFolder: boolean; createFile: boolean; createFromComponent: boolean; createFromSnapshot: boolean; rename: boolean; move: boolean; delete: boolean; trash: boolean; restore: boolean; forceDelete: boolean; importComponent: boolean; page: boolean; add: boolean; update: boolean };
+		permission: { list: string; info: string; createFolder: string; createFile: string; createFromComponent: string; createFromSnapshot: string; rename: string; move: string; delete: string; trash: string; restore: string; forceDelete: string; importComponent: string };
+		_permission: { list: boolean; info: boolean; createFolder: boolean; createFile: boolean; createFromComponent: boolean; createFromSnapshot: boolean; rename: boolean; move: boolean; delete: boolean; trash: boolean; restore: boolean; forceDelete: boolean; importComponent: boolean };
 		request: Eps.Request;
 	}
 
@@ -930,21 +732,9 @@ declare namespace Eps {
 		/** 审计日志列表（须团队旗舰档） */
 		list(data?: any): Promise<Project_auditEntity[]>;
 
-		page(data?: any): Promise<{ list: Project_auditEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		info(data?: { id: number | string }): Promise<Project_auditEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { list: string; page: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { list: boolean; page: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { list: string };
+		_permission: { list: boolean };
 		request: Eps.Request;
 	}
 
@@ -976,21 +766,9 @@ declare namespace Eps {
 		/** 标记页面测试通过；链/主链全通后清理历史快照（留最新） */
 		pagetestpass(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: Project_chainEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		info(data?: { id: number | string }): Promise<Project_chainEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { list: string; merge: string; snapshotupload: string; snapshotlist: string; snapshotapply: string; pathownerlist: string; pathownerclaim: string; pageteststatus: string; pagetestpass: string; page: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { list: boolean; merge: boolean; snapshotupload: boolean; snapshotlist: boolean; snapshotapply: boolean; pathownerlist: boolean; pathownerclaim: boolean; pageteststatus: boolean; pagetestpass: boolean; page: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { list: string; merge: string; snapshotupload: string; snapshotlist: string; snapshotapply: string; pathownerlist: string; pathownerclaim: string; pageteststatus: string; pagetestpass: string };
+		_permission: { list: boolean; merge: boolean; snapshotupload: boolean; snapshotlist: boolean; snapshotapply: boolean; pathownerlist: boolean; pathownerclaim: boolean; pageteststatus: boolean; pagetestpass: boolean };
 		request: Eps.Request;
 	}
 
@@ -1019,13 +797,9 @@ declare namespace Eps {
 		/** 回收站彻底删除组件 */
 		forceDelete(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: Project_componentEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		add(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { list: string; info: string; create: string; update: string; delete: string; trash: string; restore: string; forceDelete: string; page: string; add: string };
-		_permission: { list: boolean; info: boolean; create: boolean; update: boolean; delete: boolean; trash: boolean; restore: boolean; forceDelete: boolean; page: boolean; add: boolean };
+		permission: { list: string; info: string; create: string; update: string; delete: string; trash: string; restore: string; forceDelete: string };
+		_permission: { list: boolean; info: boolean; create: boolean; update: boolean; delete: boolean; trash: boolean; restore: boolean; forceDelete: boolean };
 		request: Eps.Request;
 	}
 
@@ -1051,19 +825,9 @@ declare namespace Eps {
 		/** 移除成员 */
 		remove(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: Project_memberEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		info(data?: { id: number | string }): Promise<Project_memberEntity>;
-
-		add(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { myTeam: string; lookup: string; leave: string; list: string; invite: string; update: string; remove: string; page: string; info: string; add: string; delete: string; restore: string };
-		_permission: { myTeam: boolean; lookup: boolean; leave: boolean; list: boolean; invite: boolean; update: boolean; remove: boolean; page: boolean; info: boolean; add: boolean; delete: boolean; restore: boolean };
+		permission: { myTeam: string; lookup: string; leave: string; list: string; invite: string; update: string; remove: string };
+		_permission: { myTeam: boolean; lookup: boolean; leave: boolean; list: boolean; invite: boolean; update: boolean; remove: boolean };
 		request: Eps.Request;
 	}
 
@@ -1098,15 +862,9 @@ declare namespace Eps {
 		/** 删除跳转边 */
 		linkDelete(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: Project_pageEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		info(data?: { id: number | string }): Promise<Project_pageEntity>;
-
-		add(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { list: string; create: string; update: string; delete: string; trash: string; restore: string; forceDelete: string; layout: string; linkUpsert: string; linkDelete: string; page: string; info: string; add: string };
-		_permission: { list: boolean; create: boolean; update: boolean; delete: boolean; trash: boolean; restore: boolean; forceDelete: boolean; layout: boolean; linkUpsert: boolean; linkDelete: boolean; page: boolean; info: boolean; add: boolean };
+		permission: { list: string; create: string; update: string; delete: string; trash: string; restore: string; forceDelete: string; layout: string; linkUpsert: string; linkDelete: string };
+		_permission: { list: boolean; create: boolean; update: boolean; delete: boolean; trash: boolean; restore: boolean; forceDelete: boolean; layout: boolean; linkUpsert: boolean; linkDelete: boolean };
 		request: Eps.Request;
 	}
 
@@ -1141,17 +899,9 @@ declare namespace Eps {
 		/** 转让项目（对方手机号 + 短信验证码） */
 		transfer(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: Project_projectEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<Project_projectEntity[]>;
-
-		info(data?: { id: number | string }): Promise<Project_projectEntity>;
-
-		add(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { create: string; filter: string; update: string; touch: string; delete: string; trash: string; restore: string; forceDelete: string; transferCode: string; transfer: string; page: string; list: string; info: string; add: string };
-		_permission: { create: boolean; filter: boolean; update: boolean; touch: boolean; delete: boolean; trash: boolean; restore: boolean; forceDelete: boolean; transferCode: boolean; transfer: boolean; page: boolean; list: boolean; info: boolean; add: boolean };
+		permission: { create: string; filter: string; update: string; touch: string; delete: string; trash: string; restore: string; forceDelete: string; transferCode: string; transfer: string };
+		_permission: { create: boolean; filter: boolean; update: boolean; touch: boolean; delete: boolean; trash: boolean; restore: boolean; forceDelete: boolean; transferCode: boolean; transfer: boolean };
 		request: Eps.Request;
 	}
 
@@ -1159,23 +909,9 @@ declare namespace Eps {
 		/** 获取微信公众号配置 */
 		wxMpConfig(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: User_commEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<User_commEntity[]>;
-
-		info(data?: { id: number | string }): Promise<User_commEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { wxMpConfig: string; page: string; list: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { wxMpConfig: boolean; page: boolean; list: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { wxMpConfig: string };
+		_permission: { wxMpConfig: boolean };
 		request: Eps.Request;
 	}
 
@@ -1207,23 +943,9 @@ declare namespace Eps {
 		/** 绑定小程序手机号 */
 		miniPhone(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: User_infoEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<User_infoEntity[]>;
-
-		info(data?: { id: number | string }): Promise<User_infoEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { person: string; updatePerson: string; updatePassword: string; logoff: string; logout: string; bindWx: string; bindPhone: string; bindEmail: string; miniPhone: string; page: string; list: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { person: boolean; updatePerson: boolean; updatePassword: boolean; logoff: boolean; logout: boolean; bindWx: boolean; bindPhone: boolean; bindEmail: boolean; miniPhone: boolean; page: boolean; list: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { person: string; updatePerson: string; updatePassword: string; logoff: string; logout: string; bindWx: string; bindPhone: string; bindEmail: string; miniPhone: string };
+		_permission: { person: boolean; updatePerson: boolean; updatePassword: boolean; logoff: boolean; logout: boolean; bindWx: boolean; bindPhone: boolean; bindEmail: boolean; miniPhone: boolean };
 		request: Eps.Request;
 	}
 
@@ -1279,23 +1001,9 @@ declare namespace Eps {
 		/** 桥接票换可吊销会话（Docs SSO） */
 		exchange(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: User_loginEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<User_loginEntity[]>;
-
-		info(data?: { id: number | string }): Promise<User_loginEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { socialProviders: string; captcha: string; otpCode: string; otp: string; smsCode: string; emailCode: string; phone: string; email: string; password: string; register: string; mini: string; mp: string; wxApp: string; uniPhone: string; miniPhone: string; refreshToken: string; exchange: string; page: string; list: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { socialProviders: boolean; captcha: boolean; otpCode: boolean; otp: boolean; smsCode: boolean; emailCode: boolean; phone: boolean; email: boolean; password: boolean; register: boolean; mini: boolean; mp: boolean; wxApp: boolean; uniPhone: boolean; miniPhone: boolean; refreshToken: boolean; exchange: boolean; page: boolean; list: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { socialProviders: string; captcha: string; otpCode: string; otp: string; smsCode: string; emailCode: string; phone: string; email: string; password: string; register: string; mini: string; mp: string; wxApp: string; uniPhone: string; miniPhone: string; refreshToken: string; exchange: string };
+		_permission: { socialProviders: boolean; captcha: boolean; otpCode: boolean; otp: boolean; smsCode: boolean; emailCode: boolean; phone: boolean; email: boolean; password: boolean; register: boolean; mini: boolean; mp: boolean; wxApp: boolean; uniPhone: boolean; miniPhone: boolean; refreshToken: boolean; exchange: boolean };
 		request: Eps.Request;
 	}
 
@@ -1303,23 +1011,9 @@ declare namespace Eps {
 		/** 当前权限 */
 		perms(data?: any): Promise<any>;
 
-		page(data?: any): Promise<{ list: User_rbacEntity[]; pagination: { page: number; size: number; total: number } }>;
-
-		list(data?: any): Promise<User_rbacEntity[]>;
-
-		info(data?: { id: number | string }): Promise<User_rbacEntity>;
-
-		add(data?: any): Promise<any>;
-
-		update(data?: any): Promise<any>;
-
-		delete(data?: any): Promise<any>;
-
-		restore(data?: any): Promise<any>;
-
 		namespace: string;
-		permission: { perms: string; page: string; list: string; info: string; add: string; update: string; delete: string; restore: string };
-		_permission: { perms: boolean; page: boolean; list: boolean; info: boolean; add: boolean; update: boolean; delete: boolean; restore: boolean };
+		permission: { perms: string };
+		_permission: { perms: boolean };
 		request: Eps.Request;
 	}
 
