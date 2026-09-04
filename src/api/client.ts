@@ -227,12 +227,12 @@ export async function request<T>(
   const lang = String(storage.get<string>('locale') || '').trim()
   if (lang) headers['X-Lang'] = lang
 
-  let body: unknown = undefined
+  let body: UniApp.RequestOptions['data'] = undefined
   if (rest.body != null) {
     body =
       typeof rest.body === 'string'
-        ? JSON.parse(rest.body as string)
-        : rest.body
+        ? (JSON.parse(rest.body as string) as UniApp.RequestOptions['data'])
+        : (rest.body as UniApp.RequestOptions['data'])
   }
 
   const data = await new Promise<{
