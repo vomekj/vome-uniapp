@@ -6,9 +6,12 @@
       :class="{ 'is-disabled': switching }"
       @click.stop="toggleMenu"
     >
-      <text class="vm-locale-toggle__flag">{{
-        locale.currentLang?.flag || '🏳️'
-      }}</text>
+      <image
+        v-if="locale.currentLang?.flag"
+        class="vm-locale-toggle__flag-img"
+        :src="String(locale.currentLang.flag)"
+        mode="aspectFill"
+      />
     </view>
     <view
       v-if="open"
@@ -28,7 +31,12 @@
         :class="{ 'is-active': locale.locale === lang.code }"
         @click="switchLocale(lang.code)"
       >
-        <text class="vm-locale-toggle__flag">{{ lang.flag || '🏳️' }}</text>
+        <image
+          v-if="lang.flag"
+          class="vm-locale-toggle__flag-img"
+          :src="String(lang.flag)"
+          mode="aspectFill"
+        />
         <text class="vm-locale-toggle__label">{{ lang.name }}</text>
       </view>
     </view>
@@ -127,6 +135,12 @@ onMounted(() => {
 .vm-locale-toggle__flag {
   font-size: 16px;
   line-height: 1;
+}
+
+.vm-locale-toggle__flag-img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 }
 
 .vm-locale-toggle__mask {

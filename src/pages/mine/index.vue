@@ -36,7 +36,15 @@
         class="cell cell--link"
         @click="onPickLocale(lang.code)"
       >
-        <text class="cell__label">{{ localeLabel(lang) }}</text>
+        <view class="cell__label-wrap">
+          <image
+            v-if="lang.flag"
+            class="cell__flag-img"
+            :src="String(lang.flag)"
+            mode="aspectFill"
+          />
+          <text class="cell__label">{{ lang.name }}</text>
+        </view>
         <text class="cell__value">{{
           locale.locale === lang.code ? '✓' : ''
         }}</text>
@@ -47,7 +55,7 @@
 
 <script setup lang="ts">
 import VmThemeToggle from '@/components/vm-theme-toggle.vue'
-import { useLocaleStore, type I18nLangItem } from '@/stores/locale'
+import { useLocaleStore } from '@/stores/locale'
 
 useH5MobileTabShell('mine')
 
@@ -62,10 +70,6 @@ const helloName = computed(() =>
 onShow(() => {
   appStore.setActive('mine')
 })
-
-function localeLabel(lang: I18nLangItem) {
-  return `${lang.flag || ''} ${lang.name}`.trim()
-}
 
 function onPickLocale(code: string) {
   void locale.setLocale(code)
@@ -162,6 +166,23 @@ async function onLogout() {
 .cell__label {
   font-size: 14px;
   color: var(--vm-brand-text, #2c3142);
+}
+.cell__label-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.cell__flag {
+  font-size: 16px;
+  line-height: 1;
+}
+.cell__flag-img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 .cell__value {
   font-size: 14px;

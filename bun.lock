@@ -5578,7 +5578,7 @@
     ],
     "browser-image-compression": [
       "browser-image-compression@2.0.2",
-      "",
+      "https://registry.npmmirror.com/browser-image-compression/-/browser-image-compression-2.0.2.tgz",
       {
         "dependencies": {
           "uzip": "0.20201231.0"
@@ -10764,7 +10764,7 @@
     ],
     "uzip": [
       "uzip@0.20201231.0",
-      "",
+      "https://registry.npmmirror.com/uzip/-/uzip-0.20201231.0.tgz",
       {},
       "sha512-OZeJfZP+R0z9D6TmBgLq2LHzSSptGMGDGigGiEe0pr8UBe/7fdflgHlHBNDASTXB5jnFuxHpNaJywSg8YFeGng=="
     ],
