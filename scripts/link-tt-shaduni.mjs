@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, rmSync, symlinkSync } from 'node:fs'
 import { dirname, join, relative } from 'node:path'
+import { platform } from 'node:os'
 import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -17,5 +18,11 @@ if (!existsSync(target)) {
 
 mkdirSync(linkDir, { recursive: true })
 if (existsSync(link)) rmSync(link, { recursive: true, force: true })
-symlinkSync(relative(linkDir, target), link)
+
+// Windows 无 Developer Mode 时 symlink 常 EPERM；目录用 junction（无需提权）
+if (platform() === 'win32') {
+  symlinkSync(target, link, 'junction')
+} else {
+  symlinkSync(relative(linkDir, target), link)
+}
 console.log('[link-tt-shaduni] linked', link, '→', target)
