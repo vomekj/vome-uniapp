@@ -1,12 +1,17 @@
 <template>
-  <view v-if="show" class="tab-shell">
+  <view class="tab-shell">
     <view class="tab-shell__body">
       <Home v-if="active === 'home'" />
       <Discover v-if="active === 'discover'" />
       <Message v-if="active === 'message'" />
       <Mine v-if="active === 'mine'" />
     </view>
-    <vm-tabbar v-model="tabName" :fixed="false" @change="onTabChange" />
+    <vm-tabbar
+      v-if="appStore.useTabbarChrome"
+      v-model="tabName"
+      :fixed="false"
+      @change="onTabChange"
+    />
   </view>
 </template>
 
@@ -18,8 +23,8 @@ import Mine from '@/pages/mine/index.vue'
 import VmTabbar from '@/components/vm-tabbar.vue'
 
 /**
- * 移动端 Tab 壳：内嵌四页 + vm-tabbar。
- * 宽屏自动 switchTab 到真实子路由（顶栏切换）。
+ * 唯一 Tab 路由壳：窄屏底栏 / 宽屏顶栏（topWindow）。
+ * 同路由只换 chrome，禁止 resize switchTab。
  */
 definePage({ type: 'home' })
 
@@ -30,16 +35,11 @@ function resolveTabName(name: string): ShellTab {
   return hit ? hit.name : 'home'
 }
 
-function resolveTabUrl(name: ShellTab) {
-  return TAB_LIST.find((item) => item.name === name)?.path ?? TAB_LIST[0].path
-}
-
 const tabName = ref<ShellTab>(
   resolveTabName(uni.getStorageSync('active') || 'home'),
 )
 
 const active = computed(() => tabName.value)
-const show = computed(() => appStore.isMobile)
 
 function syncTabFromStorage() {
   const saved = resolveTabName(uni.getStorageSync('active') || 'home')
@@ -65,16 +65,6 @@ watch(
     const next = resolveTabName(name)
     if (tabName.value !== next) tabName.value = next
   },
-)
-
-watch(
-  () => appStore.isMobile,
-  (isMobile) => {
-    if (!isMobile) {
-      appStore.debouncedSwitchTab(resolveTabUrl(tabName.value))
-    }
-  },
-  { immediate: true },
 )
 </script>
 

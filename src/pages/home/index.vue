@@ -143,10 +143,7 @@ const capabilities = [
 ]
 
 function goMine() {
-  appStore.setActive('mine')
-  if (!appStore.isMobile) {
-    openPage('/pages/mine/index')
-  }
+  appStore.goTabShell('mine')
 }
 
 function goLogin() {

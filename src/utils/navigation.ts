@@ -1,4 +1,4 @@
-import { TAB_LIST } from '@/stores/app'
+import { TAB_LIST, TAB_SHELL_URL, appStore, type TabName } from '@/stores/app'
 
 /** Tab 页 route（无前导 /，与 getCurrentPages().route 一致） */
 const TAB_ROUTES = new Set([
@@ -7,14 +7,17 @@ const TAB_ROUTES = new Set([
 ])
 
 /** Tab 完整 url（含移动壳） */
-const TAB_URLS = new Set([
-  '/pages/tabbar/index',
-  ...TAB_LIST.map((t) => t.path),
-])
+const TAB_URLS = new Set([TAB_SHELL_URL, ...TAB_LIST.map((t) => t.path)])
 
 function getCurrentRoute() {
   const pages = getCurrentPages()
   return pages[pages.length - 1]?.route ?? ''
+}
+
+function tabNameFromPath(path: string): Exclude<TabName, 'tabbar'> | null {
+  const normalized = path.startsWith('/') ? path : `/${path}`
+  const hit = TAB_LIST.find((t) => t.path === normalized)
+  return hit ? hit.name : null
 }
 
 export function isTabPath(url: string): boolean {
@@ -26,7 +29,7 @@ export function isTabPath(url: string): boolean {
 
 /**
  * 统一跳转（与 web `openPage` 同签名）。
- * Tab → switchTab；其它 → navigateTo / redirectTo。
+ * Tab → 壳 + setActive；其它 → navigateTo / redirectTo。
  */
 export function openPage(
   url: string,
@@ -36,7 +39,9 @@ export function openPage(
   if (!raw) return
   const pathOnly = raw.split('?')[0]
   if (isTabPath(pathOnly)) {
-    uni.switchTab({ url: pathOnly })
+    const name = tabNameFromPath(pathOnly)
+    if (name) appStore.setActive(name)
+    uni.switchTab({ url: TAB_SHELL_URL })
     return
   }
   if (opts?.replace) {
@@ -49,12 +54,12 @@ export function openPage(
 export function openBack(): void {
   uni.navigateBack({
     fail: () => {
-      openPage('/pages/home/index', { replace: true })
+      appStore.goHome()
     },
   })
 }
 
-/** 保留 tabBar 配置，运行时隐藏原生底栏（自定义 tt-tabbar 替代） */
+/** 保留 tabBar 配置，运行时隐藏原生底栏（自定义 tabbar 替代） */
 export function hideNativeTabBarIfNeeded() {
   const route = getCurrentRoute()
   if (!TAB_ROUTES.has(route)) return

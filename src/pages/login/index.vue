@@ -478,17 +478,12 @@ async function finishLogin(payload: {
   await userStore.get()
   uni.showToast({ title: '登录成功', icon: 'success' })
   await new Promise((r) => setTimeout(r, 600))
-  if (appStore.isMobile) {
-    const path = redirectUrl.split('?')[0] || ''
-    if (path.includes('/mine')) appStore.setActive('mine')
-    else if (path.includes('/discover')) appStore.setActive('discover')
-    else if (path.includes('/message')) appStore.setActive('message')
-    else appStore.setActive('home')
-    openPage('/pages/tabbar/index')
-    return
-  }
   const pathOnly = redirectUrl.split('?')[0] || ''
-  openPage(isTabPath(pathOnly) ? pathOnly : '/pages/home/index')
+  if (pathOnly.includes('/mine')) appStore.goTabShell('mine')
+  else if (pathOnly.includes('/discover')) appStore.goTabShell('discover')
+  else if (pathOnly.includes('/message')) appStore.goTabShell('message')
+  else if (isTabPath(pathOnly) || !pathOnly) appStore.goTabShell('home')
+  else openPage(redirectUrl)
 }
 
 async function trySsoSession() {

@@ -89,8 +89,7 @@ function goHome() {
 function switchTab(index: number) {
   const item = tabList[index]
   if (!item) return
-  appStore.setActive(item.name as TabName)
-  openPage(item.path)
+  appStore.goTabShell(item.name as Exclude<TabName, 'tabbar'>)
 }
 
 function onUserClick() {
@@ -98,12 +97,7 @@ function onUserClick() {
     openPage('/pages/login/index')
     return
   }
-  appStore.setActive('mine')
-  if (appStore.isMobile) {
-    openPage('/pages/tabbar/index')
-    return
-  }
-  openPage('/pages/mine/index')
+  appStore.goTabShell('mine')
 }
 </script>
 

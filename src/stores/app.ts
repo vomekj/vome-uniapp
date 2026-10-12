@@ -4,8 +4,6 @@ export type TabName = 'home' | 'discover' | 'message' | 'mine' | 'tabbar'
 
 const MOBILE_MAX = 767
 
-let navTimer: ReturnType<typeof setTimeout> | null = null
-
 function resolveLayoutWidth(fallback: number) {
   // #ifdef H5
   if (typeof document !== 'undefined') {
@@ -48,18 +46,30 @@ export const TAB_LIST: Array<{
   },
 ]
 
+export const TAB_SHELL_URL = '/pages/tabbar/index'
+
 /** 应用壳：断点 / Tab 激活（对齐 vome-ai useAppStore） */
 export const useAppStore = defineStore('app', {
   state: () => ({
     active: 'home' as TabName,
     windowWidth: 0,
     safeAreaInsets: {} as UniApp.SafeAreaInsets,
+    /** H5；App/小程序为 false */
+    isWeb: false,
   }),
   getters: {
     isMobile(state): boolean {
       return state.windowWidth > 0
         ? state.windowWidth <= MOBILE_MAX
         : true
+    },
+    /** 宽屏顶栏：仅 H5 且非窄屏（App/小程序始终底栏；H5 顶栏由 topWindow 承担） */
+    useTopNav(): boolean {
+      return this.isWeb && !this.isMobile
+    },
+    /** 底栏 chrome：与 useTopNav 互斥 */
+    useTabbarChrome(): boolean {
+      return !this.useTopNav
     },
   },
   actions: {
@@ -71,41 +81,35 @@ export const useAppStore = defineStore('app', {
         // ignore
       }
     },
+    /** Tab 一律进壳，禁止切到真实子路由（避免 H5 DOM 叠加） */
+    goTabShell(name?: Exclude<TabName, 'tabbar'>) {
+      if (name) this.setActive(name)
+      uni.switchTab({ url: TAB_SHELL_URL })
+    },
     goHome() {
-      this.setActive('home')
-      if (this.isMobile) {
-        uni.switchTab({ url: '/pages/tabbar/index' })
-      } else {
-        uni.switchTab({ url: '/pages/home/index' })
-      }
+      this.goTabShell('home')
     },
     initSystemInfo() {
       try {
         const { windowWidth, safeAreaInsets, uniPlatform } =
           uni.getSystemInfoSync()
-        const width =
-          uniPlatform === 'h5'
-            ? resolveLayoutWidth(windowWidth)
-            : windowWidth
+        this.isWeb = uniPlatform === 'h5'
+        const width = this.isWeb
+          ? resolveLayoutWidth(windowWidth)
+          : windowWidth
         this.windowWidth = width
         this.safeAreaInsets = (safeAreaInsets ||
           {}) as UniApp.SafeAreaInsets
         uni.onWindowResize((res) => {
-          const nextWidth =
-            uniPlatform === 'h5'
-              ? resolveLayoutWidth(res.size.windowWidth)
-              : res.size.windowWidth
+          const nextWidth = this.isWeb
+            ? resolveLayoutWidth(res.size.windowWidth)
+            : res.size.windowWidth
           this.windowWidth = nextWidth
         })
       } catch {
         this.windowWidth = 375
+        this.isWeb = false
       }
-    },
-    debouncedSwitchTab(url: string) {
-      if (navTimer) clearTimeout(navTimer)
-      navTimer = setTimeout(() => {
-        uni.switchTab({ url })
-      }, 300)
     },
   },
 })
